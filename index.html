@@ -549,6 +549,336 @@ section { padding: 88px 0; position: relative; z-index: 1; }
 
 .edu-learn-item p strong { color: var(--white); font-weight: 700; }
 
+   /* ── Lead Quality Section (Landing Page) ── */
+  .lpq-section {
+    padding: 96px 0;
+    background: var(--navy-2, #080F1E);
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .lpq-section::before {
+    content: '';
+    position: absolute;
+    top: -160px; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 500px;
+    background: radial-gradient(ellipse, rgba(37,99,235,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+ 
+  .lpq-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -80px;
+    width: 400px; height: 350px;
+    background: radial-gradient(circle, rgba(245,158,11,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+ 
+  .lpq-section .container { position: relative; z-index: 1; }
+ 
+  /* Eyebrow */
+  .lpq-eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold, #F59E0B);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+ 
+  .lpq-eyebrow::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--gold, #F59E0B);
+    opacity: 0.3;
+  }
+ 
+  /* Title */
+  .lpq-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: 0.03em;
+    line-height: 0.97;
+    color: var(--white, #EFF6FF);
+    margin-bottom: 16px;
+  }
+ 
+  .lpq-title .blue { color: var(--blue-light, #60A5FA); }
+  .lpq-title .gold { color: var(--gold, #F59E0B); }
+ 
+  .lpq-sub {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 16px;
+    color: var(--muted-2, #64748B);
+    line-height: 1.7;
+    max-width: 620px;
+    margin-bottom: 56px;
+  }
+ 
+  /* ── Versus strip ── */
+  .lpq-versus {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    background: var(--card, #0D1B2E);
+    border: 1px solid var(--border, #112240);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 64px;
+  }
+ 
+  .lpq-versus-col { padding: 32px 36px; }
+ 
+  .lpq-versus-col.lpq-bad  { background: rgba(239,68,68,0.03); }
+  .lpq-versus-col.lpq-good { background: rgba(37,99,235,0.04); }
+ 
+  .lpq-versus-head {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+ 
+  .lpq-versus-head.bad  { color: #F87171; }
+  .lpq-versus-head.good { color: var(--blue-light, #60A5FA); }
+ 
+  .lpq-versus-list { display: flex; flex-direction: column; gap: 10px; }
+ 
+  .lpq-versus-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+ 
+  .lpq-versus-item.bad-item  { color: #4A6080; }
+  .lpq-versus-item.good-item { color: #94A3B8; }
+ 
+  .lpq-vi-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+ 
+  .lpq-vi-dot.x     { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #F87171; }
+  .lpq-vi-dot.check { background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.25); color: var(--blue-light, #60A5FA); }
+ 
+  .lpq-versus-mid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 12px;
+    border-left: 1px solid var(--border, #112240);
+    border-right: 1px solid var(--border, #112240);
+    gap: 10px;
+  }
+ 
+  .lpq-vs-rail { flex: 1; width: 1px; background: var(--border, #112240); }
+ 
+  .lpq-vs-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    color: #1E3A5F;
+    writing-mode: vertical-rl;
+  }
+ 
+  /* ── 8 gates grid ── */
+  .lpq-gates-intro {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+ 
+  .lpq-gates-intro p {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 15px;
+    color: var(--muted-2, #64748B);
+    line-height: 1.7;
+  }
+ 
+  .lpq-gates-intro p strong { color: var(--gold, #F59E0B); }
+ 
+  .lpq-gates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-bottom: 56px;
+  }
+ 
+  .lpq-gate {
+    background: var(--card, #0D1B2E);
+    border: 1px solid var(--border, #112240);
+    border-radius: 16px;
+    padding: 22px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.22s;
+  }
+ 
+  .lpq-gate:hover {
+    border-color: rgba(37,99,235,0.35);
+    transform: translateY(-3px);
+  }
+ 
+  .lpq-gate::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--blue, #2563EB), var(--blue-light, #60A5FA));
+    border-radius: 3px 0 0 3px;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+ 
+  .lpq-gate:hover::after { opacity: 1; }
+ 
+  .lpq-gate-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: rgba(37,99,235,0.15);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 28px;
+    margin-top: 1px;
+  }
+ 
+  .lpq-gate-body { flex: 1; }
+ 
+  .lpq-gate-check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(37,99,235,0.1);
+    border: 1px solid rgba(37,99,235,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    color: var(--blue-light, #60A5FA);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+ 
+  .lpq-gate-title {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--white, #EFF6FF);
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+ 
+  .lpq-gate-title .accent { color: var(--blue-light, #60A5FA); }
+  .lpq-gate-title .gold   { color: var(--gold, #F59E0B); }
+ 
+  .lpq-gate-desc {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 12px;
+    color: var(--muted-2, #64748B);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+ 
+  .lpq-gate-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: rgba(37,99,235,0.08);
+    border: 1px solid rgba(37,99,235,0.2);
+    color: var(--blue-light, #60A5FA);
+  }
+ 
+  /* ── Bottom metrics ── */
+  .lpq-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--card, #0D1B2E);
+    border: 1px solid var(--border, #112240);
+    border-top: 2px solid var(--blue, #2563EB);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+ 
+  .lpq-metric {
+    padding: 28px 20px;
+    text-align: center;
+    border-right: 1px solid var(--border, #112240);
+  }
+ 
+  .lpq-metric:last-child { border-right: none; }
+ 
+  .lpq-metric-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    letter-spacing: 0.03em;
+    color: var(--blue-light, #60A5FA);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+ 
+  .lpq-metric-num.gold { color: var(--gold, #F59E0B); }
+ 
+  .lpq-metric-label {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 12px;
+    color: var(--muted-2, #64748B);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+ 
+  .lpq-metric-label strong {
+    display: block;
+    color: #475569;
+    font-size: 11px;
+    margin-top: 2px;
+    font-weight: 500;
+  }
+ 
+  /* Responsive */
+  @media (max-width: 900px) {
+    .lpq-versus { grid-template-columns: 1fr; }
+    .lpq-versus-mid { flex-direction: row; padding: 10px 24px; border-top: 1px solid var(--border, #112240); border-bottom: 1px solid var(--border, #112240); border-left: none; border-right: none; }
+    .lpq-vs-rail { width: auto; height: 1px; flex: 1; }
+    .lpq-vs-text { writing-mode: horizontal-tb; }
+    .lpq-metrics { grid-template-columns: 1fr 1fr; }
+    .lpq-metric:nth-child(2) { border-right: none; }
+    .lpq-metric:nth-child(3), .lpq-metric:nth-child(4) { border-top: 1px solid var(--border, #112240); }
+    .lpq-metric:nth-child(4) { border-right: none; }
+  }
+ 
+  @media (max-width: 600px) {
+    .lpq-gates { grid-template-columns: 1fr; }
+    .lpq-versus-col { padding: 24px 20px; }
+    .lpq-section .container { padding: 0 16px; }
+  }
+
 /* ═══════════════════════════
    DOWNLOADS
    ═══════════════════════════ */
@@ -1778,6 +2108,172 @@ footer a:hover { color: var(--gold); }
 </section>
 
 <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════
+     STEP 2 — PASTE THIS <section>
+     ═══════════════════════════════════ -->
+ 
+<section class="lpq-section" id="lead-quality">
+  <div class="container">
+ 
+    <!-- Header -->
+    <div class="lpq-eyebrow">Lead Quality Standard</div>
+    <h2 class="lpq-title">Not All Leads<br>Are <span class="blue">Equal.</span><br>Ours Are <span class="gold">Different.</span></h2>
+    <p class="lpq-sub">
+      Before any homeowner reaches your WhatsApp, they have passed 8 quality gates.
+      This is what separates a conversion-ready lead from a wasted site visit.
+    </p>
+ 
+    <!-- Versus strip -->
+    <div class="lpq-versus">
+ 
+      <div class="lpq-versus-col lpq-bad">
+        <div class="lpq-versus-head bad">
+          <span>✕</span> Typical Agency Lead
+        </div>
+        <div class="lpq-versus-list">
+          <div class="lpq-versus-item bad-item"><div class="lpq-vi-dot x">✕</div><span>Renter with no authority to approve installation</span></div>
+          <div class="lpq-versus-item bad-item"><div class="lpq-vi-dot x">✕</div><span>No install timeline — "still thinking about it"</span></div>
+          <div class="lpq-versus-item bad-item"><div class="lpq-vi-dot x">✕</div><span>Under ₦500k budget — system cannot make financial sense</span></div>
+          <div class="lpq-versus-item bad-item"><div class="lpq-vi-dot x">✕</div><span>Outside your service area — wasted fuel and time</span></div>
+          <div class="lpq-versus-item bad-item"><div class="lpq-vi-dot x">✕</div><span>Already contacted 3 installers — comparing prices</span></div>
+          <div class="lpq-versus-item bad-item"><div class="lpq-vi-dot x">✕</div><span>Home unsuitable — roof, wiring, or shading issues</span></div>
+        </div>
+      </div>
+ 
+      <div class="lpq-versus-mid">
+        <div class="lpq-vs-rail"></div>
+        <div class="lpq-vs-text">VS</div>
+        <div class="lpq-vs-rail"></div>
+      </div>
+ 
+      <div class="lpq-versus-col lpq-good">
+        <div class="lpq-versus-head good">
+          <span>✓</span> Tubalcain Qualified Lead
+        </div>
+        <div class="lpq-versus-list">
+          <div class="lpq-versus-item good-item"><div class="lpq-vi-dot check">✓</div><span>Property owner or authorised decision-maker confirmed</span></div>
+          <div class="lpq-versus-item good-item"><div class="lpq-vi-dot check">✓</div><span>Installing within 30–90 days — committed timeline</span></div>
+          <div class="lpq-versus-item good-item"><div class="lpq-vi-dot check">✓</div><span>₦1.5M+ budget confirmed before reaching your phone</span></div>
+          <div class="lpq-versus-item good-item"><div class="lpq-vi-dot check">✓</div><span>Within your territory — location verified on signup</span></div>
+          <div class="lpq-versus-item good-item"><div class="lpq-vi-dot check">✓</div><span>Has not spoken to any installer yet — you are first</span></div>
+          <div class="lpq-versus-item good-item"><div class="lpq-vi-dot check">✓</div><span>Home passed safety assessment — installation ready</span></div>
+        </div>
+      </div>
+ 
+    </div>
+ 
+    <!-- 8 Quality Gates -->
+    <div class="lpq-gates-intro">
+      <p>Every lead passes <strong>8 quality gates</strong> before your phone rings. Here is exactly what each one confirms.</p>
+    </div>
+ 
+    <div class="lpq-gates">
+ 
+      <div class="lpq-gate">
+        <div class="lpq-gate-num">01</div>
+        <div class="lpq-gate-body">
+          <div class="lpq-gate-title">Installing Within <span class="accent">90 Days</span></div>
+          <div class="lpq-gate-desc">Not browsing. Not "maybe next year." Every lead has selected a specific 30-day or 90-day install window before we send them to you.</div>
+          <div class="lpq-gate-pill">No Timewasters</div>
+        </div>
+        <div class="lpq-gate-check">✓</div>
+      </div>
+ 
+      <div class="lpq-gate">
+        <div class="lpq-gate-num">02</div>
+        <div class="lpq-gate-body">
+          <div class="lpq-gate-title"><span class="gold">₦1.5M+</span> Budget Confirmed</div>
+          <div class="lpq-gate-desc">Real buyers only. Budget is verified through our qualification flow — no underfunded enquiries or price shoppers reach your number.</div>
+          <div class="lpq-gate-pill">Serious Buyers</div>
+        </div>
+        <div class="lpq-gate-check">✓</div>
+      </div>
+ 
+      <div class="lpq-gate">
+        <div class="lpq-gate-num">03</div>
+        <div class="lpq-gate-body">
+          <div class="lpq-gate-title">Property Owner or <span class="accent">Authorised</span></div>
+          <div class="lpq-gate-desc">Every lead owns the property or holds documented permission to install. Zero "I need to check with my landlord" situations.</div>
+          <div class="lpq-gate-pill">Decision Makers</div>
+        </div>
+        <div class="lpq-gate-check">✓</div>
+      </div>
+ 
+      <div class="lpq-gate">
+        <div class="lpq-gate-num">04</div>
+        <div class="lpq-gate-body">
+          <div class="lpq-gate-title">Spending <span class="gold">₦30k+/Month</span> on Power</div>
+          <div class="lpq-gate-desc">The numbers make sense for them. Leads spending under ₦30,000 monthly on electricity and generator fuel are automatically disqualified.</div>
+          <div class="lpq-gate-pill">ROI Makes Sense</div>
+        </div>
+        <div class="lpq-gate-check">✓</div>
+      </div>
+ 
+      <div class="lpq-gate">
+        <div class="lpq-gate-num">05</div>
+        <div class="lpq-gate-body">
+          <div class="lpq-gate-title">Home <span class="accent">Passed Safety Check</span></div>
+          <div class="lpq-gate-desc">Roof condition, wiring capacity, and sunlight exposure all assessed. Homes that would fail post-installation are filtered before they reach you.</div>
+          <div class="lpq-gate-pill">Installation Ready</div>
+        </div>
+        <div class="lpq-gate-check">✓</div>
+      </div>
+ 
+      <div class="lpq-gate">
+        <div class="lpq-gate-num">06</div>
+        <div class="lpq-gate-body">
+          <div class="lpq-gate-title"><span class="accent">Actively Seeking</span> Quotes</div>
+          <div class="lpq-gate-desc">Not a cold contact. They initiated the process — filled out a form, answered 13 questions, and are ready to hear from a professional installer.</div>
+          <div class="lpq-gate-pill">Hot Leads</div>
+        </div>
+        <div class="lpq-gate-check">✓</div>
+      </div>
+ 
+      <div class="lpq-gate">
+        <div class="lpq-gate-num">07</div>
+        <div class="lpq-gate-body">
+          <div class="lpq-gate-title">Within Your <span class="accent">Service Territory</span></div>
+          <div class="lpq-gate-desc">Location is confirmed at signup. Every lead is geographically matched to your active service area. No wasted journeys.</div>
+          <div class="lpq-gate-pill">Location Matched</div>
+        </div>
+        <div class="lpq-gate-check">✓</div>
+      </div>
+ 
+      <div class="lpq-gate">
+        <div class="lpq-gate-num">08</div>
+        <div class="lpq-gate-body">
+          <div class="lpq-gate-title">Expecting Your <span class="gold">Call</span></div>
+          <div class="lpq-gate-desc">They gave their WhatsApp willingly. They know a certified installer will contact them. They understand the next step is an energy assessment — not a surprise pitch.</div>
+          <div class="lpq-gate-pill">Pre-Warmed Buyers</div>
+        </div>
+        <div class="lpq-gate-check">✓</div>
+      </div>
+ 
+    </div>
+ 
+    <!-- Metrics -->
+    <div class="lpq-metrics">
+      <div class="lpq-metric">
+        <div class="lpq-metric-num">13</div>
+        <div class="lpq-metric-label">Qualification Questions<strong>Every lead answers all 13</strong></div>
+      </div>
+      <div class="lpq-metric">
+        <div class="lpq-metric-num">8</div>
+        <div class="lpq-metric-label">Quality Gates<strong>Must pass every single one</strong></div>
+      </div>
+      <div class="lpq-metric">
+        <div class="lpq-metric-num gold">38%</div>
+        <div class="lpq-metric-label">Average Close Rate<strong>Industry average is under 10%</strong></div>
+      </div>
+      <div class="lpq-metric">
+        <div class="lpq-metric-num">&lt;1s</div>
+        <div class="lpq-metric-label">Delivery Speed<strong>From qualification to your phone</strong></div>
+      </div>
+    </div>
+ 
+  </div>
+</section>
 
 
 <!-- ═══════════════════════════════════════
