@@ -9,12 +9,13 @@
 <!-- FIX: Preconnect hints — browser opens connections early -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://www.youtube-nocookie.com">
 <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+<!-- Preload LCP image — the first visible thumbnail (edu video) -->
+<link rel="preload" as="image" href="https://i.ytimg.com/vi/k0-bs3IeeUQ/hqdefault.jpg" fetchpriority="high">
 
 <!-- FIX: Fonts load non-blocking via media=print trick — eliminates 910ms FCP delay -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=optional" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=optional"></noscript>
 
 <!-- FIX: GA config inline, async script tag after — does not block render -->
 <script>
@@ -1143,7 +1144,7 @@ footer a:hover { color: var(--gold); }
         <div class="video-thumb">
           <!-- FIX: Facade replaces eager iframe — YouTube JS only loads on click -->
           <div class="yt-facade" data-videoid="5xuoWGLVIT0" onclick="loadYT(this)">
-            <img src="https://i.ytimg.com/vi/5xuoWGLVIT0/hqdefault.jpg" alt="41 Qualified Leads in 1 Week — Ad Account Proof" loading="lazy">
+            <img src="https://i.ytimg.com/vi/5xuoWGLVIT0/hqdefault.jpg" alt="41 Qualified Leads in 1 Week — Ad Account Proof" width="480" height="270" loading="lazy">
             <div class="yt-play-btn"></div>
           </div>
         </div>
@@ -1156,7 +1157,7 @@ footer a:hover { color: var(--gold); }
       <div class="video-proof-card">
         <div class="video-thumb">
           <div class="yt-facade" data-videoid="UZKEgFK0iqk" onclick="loadYT(this)">
-            <img src="https://i.ytimg.com/vi/UZKEgFK0iqk/hqdefault.jpg" alt="38% Close Rate — 16 High-Ticket Jobs Tracked Live" loading="lazy">
+            <img src="https://i.ytimg.com/vi/UZKEgFK0iqk/hqdefault.jpg" alt="38% Close Rate — 16 High-Ticket Jobs Tracked Live" width="480" height="270" loading="lazy">
             <div class="yt-play-btn"></div>
           </div>
         </div>
@@ -1169,7 +1170,7 @@ footer a:hover { color: var(--gold); }
       <div class="video-proof-card">
         <div class="video-thumb">
           <div class="yt-facade" data-videoid="9VmnikPJ4p0" onclick="loadYT(this)">
-            <img src="https://i.ytimg.com/vi/9VmnikPJ4p0/hqdefault.jpg" alt="Before: ₦12,000 (0 Leads) → After: 35 Qualified Leads" loading="lazy">
+            <img src="https://i.ytimg.com/vi/9VmnikPJ4p0/hqdefault.jpg" alt="Before: ₦12,000 (0 Leads) → After: 35 Qualified Leads" width="480" height="270" loading="lazy">
             <div class="yt-play-btn"></div>
           </div>
         </div>
@@ -1196,7 +1197,7 @@ footer a:hover { color: var(--gold); }
     <div class="edu-video-wrap">
       <!-- FIX: Facade for main education video — biggest LCP offender -->
       <div class="yt-facade" data-videoid="k0-bs3IeeUQ" onclick="loadYT(this)" style="aspect-ratio:16/9;">
-        <img src="https://i.ytimg.com/vi/k0-bs3IeeUQ/hqdefault.jpg" alt="The ABC Playbook — Full System Walkthrough" style="width:100%;aspect-ratio:16/9;object-fit:cover;">
+        <img src="https://i.ytimg.com/vi/k0-bs3IeeUQ/hqdefault.jpg" alt="The ABC Playbook — Full System Walkthrough" width="480" height="270" style="width:100%;aspect-ratio:16/9;object-fit:cover;" fetchpriority="high">
         <div class="yt-play-btn" style="width:80px;height:80px;"></div>
       </div>
     </div>
@@ -1489,7 +1490,7 @@ footer a:hover { color: var(--gold); }
           <div class="offer-features-label">What You Get</div>
           <ul class="offer-features">
             <li><span class="of-check">✓</span><span><strong>10+ pre-qualified homeowners</strong> delivered to your WhatsApp in 7 days</span></li>
-            <li><span class="of-check">✓</span><span>Done-for-you Facebook campaign — built and launched for you with Tubalcain business manager and page</span></li>
+            <li><span class="of-check">✓</span><span>Done-for-you Facebook campaign — built and launched for you</span></li>
             <li><span class="of-check">✓</span><span>13-question qualification system — every lead confirmed</span></li>
             <li><span class="of-check">✓</span><span>Real-time SMS delivery — under 1 second per lead</span></li>
             <li><span class="of-check">✓</span><span>Authority Close Kit Vol. 1 &amp; 2</span></li>
