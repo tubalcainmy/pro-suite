@@ -6,14 +6,24 @@
 <title>The ABC Playbook — Tubalcain Agency | Free Solar Lead System</title>
 <meta name="description" content="The exact system used to attract, filter and deliver 41 qualified solar homeowners in 7 days. Free playbook, free calculator, plus DFY partner slots for Nigerian solar installers.">
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TZ6FE345VT"></script>
+<!-- FIX: Preconnect hints — browser opens connections early -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.youtube-nocookie.com">
+<link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+
+<!-- FIX: Fonts load non-blocking via media=print trick — eliminates 910ms FCP delay -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"></noscript>
+
+<!-- FIX: GA config inline, async script tag after — does not block render -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-TZ6FE345VT');
 </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TZ6FE345VT"></script>
 
 <!-- Meta Pixel — fires Lead on page load (visitor already qualified) -->
 <script>
@@ -31,8 +41,6 @@ fbq('track', 'Lead');
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=876782168289067&ev=Lead&noscript=1"/></noscript>
-
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
 
 <style>
 /* ═══════════════════════════
@@ -57,16 +65,17 @@ src="https://www.facebook.com/tr?id=876782168289067&ev=Lead&noscript=1"/></noscr
   --muted-2:    #64748B;
   --green:      #22C55E;
   --red:        #EF4444;
+  /* FIX: font-display fallback stack so text shows before fonts load */
+  font-display: swap;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 body {
   background: var(--navy);
   color: var(--white);
-  font-family: 'Epilogue', sans-serif;
+  font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -126,7 +135,7 @@ body::before {
 }
 
 .top-bar-logo {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'Arial Black', sans-serif;
   font-size: 22px;
   letter-spacing: 0.08em;
   color: var(--white);
@@ -179,7 +188,7 @@ section { padding: 88px 0; position: relative; z-index: 1; }
 }
 
 .section-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'Arial Black', sans-serif;
   font-size: clamp(34px, 5vw, 52px);
   letter-spacing: 0.03em;
   line-height: 1;
@@ -256,7 +265,7 @@ section { padding: 88px 0; position: relative; z-index: 1; }
 }
 
 .hero h1 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', 'Arial Black', sans-serif;
   font-size: clamp(44px, 7vw, 76px);
   letter-spacing: 0.03em;
   line-height: 0.95;
@@ -417,8 +426,69 @@ section { padding: 88px 0; position: relative; z-index: 1; }
 
 .stat-label { font-size: 12px; color: var(--muted-2); font-weight: 600; line-height: 1.4; }
 .stat-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
 .stat-div { width: 1px; height: 48px; background: var(--border); flex-shrink: 0; }
+
+/* ═══════════════════════════
+   FIX: YOUTUBE FACADE STYLES
+   Replaces iframes that loaded 1.2MB of YouTube JS on render
+   ═══════════════════════════ */
+.yt-facade {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  background: #000;
+  display: block;
+}
+
+.yt-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.yt-facade:hover img { opacity: 0.85; }
+
+.yt-play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px; height: 68px;
+  background: rgba(255,0,0,0.9);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+
+.yt-facade:hover .yt-play-btn {
+  background: #FF0000;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.yt-play-btn::after {
+  content: '';
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 12px 0 12px 22px;
+  border-color: transparent transparent transparent #fff;
+  margin-left: 4px;
+}
+
+/* When active: facade is replaced by iframe */
+.yt-facade.loading .yt-play-btn { background: rgba(100,100,100,0.8); }
+.yt-facade.loading .yt-play-btn::after {
+  border: none;
+  width: 20px; height: 20px;
+  border-top: 3px solid #fff;
+  border-right: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ═══════════════════════════
    VIDEO SECTION
@@ -450,6 +520,12 @@ section { padding: 88px 0; position: relative; z-index: 1; }
   padding-bottom: 56.25%;
   background: #000;
   overflow: hidden;
+}
+
+.video-thumb .yt-facade {
+  position: absolute;
+  inset: 0;
+  height: 100%;
 }
 
 .video-thumb iframe {
@@ -491,7 +567,6 @@ section { padding: 88px 0; position: relative; z-index: 1; }
 
 .edu-video-wrap {
   position: relative;
-  position: relative;
   border-radius: 16px;
   overflow: hidden;
   background: #000;
@@ -507,6 +582,19 @@ section { padding: 88px 0; position: relative; z-index: 1; }
   border-radius: 17px;
   background: linear-gradient(135deg, rgba(37,99,235,0.3), transparent 50%, rgba(245,158,11,0.2));
   z-index: -1;
+}
+
+/* Edu video facade fills the wrapper */
+.edu-video-wrap .yt-facade {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: block;
+}
+
+.edu-video-wrap .yt-facade img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
 }
 
 .edu-video-wrap iframe {
@@ -541,346 +629,78 @@ section { padding: 88px 0; position: relative; z-index: 1; }
   margin-top: 6px;
 }
 
-.edu-learn-item p {
-  font-size: 13px;
-  color: #94A3B8;
-  line-height: 1.55;
-}
-
+.edu-learn-item p { font-size: 13px; color: #94A3B8; line-height: 1.55; }
 .edu-learn-item p strong { color: var(--white); font-weight: 700; }
 
-   /* ── Lead Quality Section (Landing Page) ── */
-  .lpq-section {
-    padding: 96px 0;
-    background: var(--navy-2, #080F1E);
-    position: relative;
-    overflow: hidden;
-  }
- 
-  .lpq-section::before {
-    content: '';
-    position: absolute;
-    top: -160px; left: 50%;
-    transform: translateX(-50%);
-    width: 900px; height: 500px;
-    background: radial-gradient(ellipse, rgba(37,99,235,0.12) 0%, transparent 65%);
-    pointer-events: none;
-  }
- 
-  .lpq-section::after {
-    content: '';
-    position: absolute;
-    bottom: -100px; right: -80px;
-    width: 400px; height: 350px;
-    background: radial-gradient(circle, rgba(245,158,11,0.07) 0%, transparent 65%);
-    pointer-events: none;
-  }
- 
-  .lpq-section .container { position: relative; z-index: 1; }
- 
-  /* Eyebrow */
-  .lpq-eyebrow {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold, #F59E0B);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
- 
-  .lpq-eyebrow::after {
-    content: '';
-    flex: 1;
-    max-width: 60px;
-    height: 1px;
-    background: var(--gold, #F59E0B);
-    opacity: 0.3;
-  }
- 
-  /* Title */
-  .lpq-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 5vw, 56px);
-    letter-spacing: 0.03em;
-    line-height: 0.97;
-    color: var(--white, #EFF6FF);
-    margin-bottom: 16px;
-  }
- 
-  .lpq-title .blue { color: var(--blue-light, #60A5FA); }
-  .lpq-title .gold { color: var(--gold, #F59E0B); }
- 
-  .lpq-sub {
-    font-family: 'Epilogue', sans-serif;
-    font-size: 16px;
-    color: var(--muted-2, #64748B);
-    line-height: 1.7;
-    max-width: 620px;
-    margin-bottom: 56px;
-  }
- 
-  /* ── Versus strip ── */
-  .lpq-versus {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: stretch;
-    background: var(--card, #0D1B2E);
-    border: 1px solid var(--border, #112240);
-    border-radius: 20px;
-    overflow: hidden;
-    margin-bottom: 64px;
-  }
- 
-  .lpq-versus-col { padding: 32px 36px; }
- 
-  .lpq-versus-col.lpq-bad  { background: rgba(239,68,68,0.03); }
-  .lpq-versus-col.lpq-good { background: rgba(37,99,235,0.04); }
- 
-  .lpq-versus-head {
-    font-family: 'Epilogue', sans-serif;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
- 
-  .lpq-versus-head.bad  { color: #F87171; }
-  .lpq-versus-head.good { color: var(--blue-light, #60A5FA); }
- 
-  .lpq-versus-list { display: flex; flex-direction: column; gap: 10px; }
- 
-  .lpq-versus-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 9px;
-    font-family: 'Epilogue', sans-serif;
-    font-size: 13px;
-    line-height: 1.5;
-    font-weight: 500;
-  }
- 
-  .lpq-versus-item.bad-item  { color: #4A6080; }
-  .lpq-versus-item.good-item { color: #94A3B8; }
- 
-  .lpq-vi-dot {
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 9px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
- 
-  .lpq-vi-dot.x     { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #F87171; }
-  .lpq-vi-dot.check { background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.25); color: var(--blue-light, #60A5FA); }
- 
-  .lpq-versus-mid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 16px 12px;
-    border-left: 1px solid var(--border, #112240);
-    border-right: 1px solid var(--border, #112240);
-    gap: 10px;
-  }
- 
-  .lpq-vs-rail { flex: 1; width: 1px; background: var(--border, #112240); }
- 
-  .lpq-vs-text {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 14px;
-    letter-spacing: 0.12em;
-    color: #1E3A5F;
-    writing-mode: vertical-rl;
-  }
- 
-  /* ── 8 gates grid ── */
-  .lpq-gates-intro {
-    text-align: center;
-    margin-bottom: 40px;
-  }
- 
-  .lpq-gates-intro p {
-    font-family: 'Epilogue', sans-serif;
-    font-size: 15px;
-    color: var(--muted-2, #64748B);
-    line-height: 1.7;
-  }
- 
-  .lpq-gates-intro p strong { color: var(--gold, #F59E0B); }
- 
-  .lpq-gates {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 14px;
-    margin-bottom: 56px;
-  }
- 
-  .lpq-gate {
-    background: var(--card, #0D1B2E);
-    border: 1px solid var(--border, #112240);
-    border-radius: 16px;
-    padding: 22px 24px;
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.25s, transform 0.22s;
-  }
- 
-  .lpq-gate:hover {
-    border-color: rgba(37,99,235,0.35);
-    transform: translateY(-3px);
-  }
- 
-  .lpq-gate::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: linear-gradient(180deg, var(--blue, #2563EB), var(--blue-light, #60A5FA));
-    border-radius: 3px 0 0 3px;
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
- 
-  .lpq-gate:hover::after { opacity: 1; }
- 
-  .lpq-gate-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    color: rgba(37,99,235,0.15);
-    line-height: 1;
-    flex-shrink: 0;
-    min-width: 28px;
-    margin-top: 1px;
-  }
- 
-  .lpq-gate-body { flex: 1; }
- 
-  .lpq-gate-check {
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    background: rgba(37,99,235,0.1);
-    border: 1px solid rgba(37,99,235,0.25);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px;
-    color: var(--blue-light, #60A5FA);
-    flex-shrink: 0;
-    margin-top: 3px;
-  }
- 
-  .lpq-gate-title {
-    font-family: 'Epilogue', sans-serif;
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--white, #EFF6FF);
-    margin-bottom: 5px;
-    line-height: 1.3;
-  }
- 
-  .lpq-gate-title .accent { color: var(--blue-light, #60A5FA); }
-  .lpq-gate-title .gold   { color: var(--gold, #F59E0B); }
- 
-  .lpq-gate-desc {
-    font-family: 'Epilogue', sans-serif;
-    font-size: 12px;
-    color: var(--muted-2, #64748B);
-    line-height: 1.6;
-    margin-bottom: 8px;
-  }
- 
-  .lpq-gate-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-family: 'Epilogue', sans-serif;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 100px;
-    background: rgba(37,99,235,0.08);
-    border: 1px solid rgba(37,99,235,0.2);
-    color: var(--blue-light, #60A5FA);
-  }
- 
-  /* ── Bottom metrics ── */
-  .lpq-metrics {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    background: var(--card, #0D1B2E);
-    border: 1px solid var(--border, #112240);
-    border-top: 2px solid var(--blue, #2563EB);
-    border-radius: 16px;
-    overflow: hidden;
-  }
- 
-  .lpq-metric {
-    padding: 28px 20px;
-    text-align: center;
-    border-right: 1px solid var(--border, #112240);
-  }
- 
-  .lpq-metric:last-child { border-right: none; }
- 
-  .lpq-metric-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 44px;
-    letter-spacing: 0.03em;
-    color: var(--blue-light, #60A5FA);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
- 
-  .lpq-metric-num.gold { color: var(--gold, #F59E0B); }
- 
-  .lpq-metric-label {
-    font-family: 'Epilogue', sans-serif;
-    font-size: 12px;
-    color: var(--muted-2, #64748B);
-    font-weight: 600;
-    line-height: 1.4;
-  }
- 
-  .lpq-metric-label strong {
-    display: block;
-    color: #475569;
-    font-size: 11px;
-    margin-top: 2px;
-    font-weight: 500;
-  }
- 
-  /* Responsive */
-  @media (max-width: 900px) {
-    .lpq-versus { grid-template-columns: 1fr; }
-    .lpq-versus-mid { flex-direction: row; padding: 10px 24px; border-top: 1px solid var(--border, #112240); border-bottom: 1px solid var(--border, #112240); border-left: none; border-right: none; }
-    .lpq-vs-rail { width: auto; height: 1px; flex: 1; }
-    .lpq-vs-text { writing-mode: horizontal-tb; }
-    .lpq-metrics { grid-template-columns: 1fr 1fr; }
-    .lpq-metric:nth-child(2) { border-right: none; }
-    .lpq-metric:nth-child(3), .lpq-metric:nth-child(4) { border-top: 1px solid var(--border, #112240); }
-    .lpq-metric:nth-child(4) { border-right: none; }
-  }
- 
-  @media (max-width: 600px) {
-    .lpq-gates { grid-template-columns: 1fr; }
-    .lpq-versus-col { padding: 24px 20px; }
-    .lpq-section .container { padding: 0 16px; }
-  }
+/* ── Lead Quality Section ── */
+.lpq-section { padding: 96px 0; background: var(--navy-2); position: relative; overflow: hidden; }
+.lpq-section::before { content: ''; position: absolute; top: -160px; left: 50%; transform: translateX(-50%); width: 900px; height: 500px; background: radial-gradient(ellipse, rgba(37,99,235,0.12) 0%, transparent 65%); pointer-events: none; }
+.lpq-section::after { content: ''; position: absolute; bottom: -100px; right: -80px; width: 400px; height: 350px; background: radial-gradient(circle, rgba(245,158,11,0.07) 0%, transparent 65%); pointer-events: none; }
+.lpq-section .container { position: relative; z-index: 1; }
+.lpq-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.lpq-eyebrow::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--gold); opacity: 0.3; }
+.lpq-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 56px); letter-spacing: 0.03em; line-height: 0.97; color: var(--white); margin-bottom: 16px; }
+.lpq-title .blue { color: var(--blue-light); }
+.lpq-title .gold { color: var(--gold); }
+.lpq-sub { font-size: 16px; color: var(--muted-2); line-height: 1.7; max-width: 620px; margin-bottom: 56px; }
+.lpq-versus { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; margin-bottom: 64px; }
+.lpq-versus-col { padding: 32px 36px; }
+.lpq-versus-col.lpq-bad  { background: rgba(239,68,68,0.03); }
+.lpq-versus-col.lpq-good { background: rgba(37,99,235,0.04); }
+.lpq-versus-head { font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+.lpq-versus-head.bad  { color: #F87171; }
+.lpq-versus-head.good { color: var(--blue-light); }
+.lpq-versus-list { display: flex; flex-direction: column; gap: 10px; }
+.lpq-versus-item { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.5; font-weight: 500; }
+.lpq-versus-item.bad-item  { color: #4A6080; }
+.lpq-versus-item.good-item { color: #94A3B8; }
+.lpq-vi-dot { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; flex-shrink: 0; margin-top: 1px; }
+.lpq-vi-dot.x     { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #F87171; }
+.lpq-vi-dot.check { background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.25); color: var(--blue-light); }
+.lpq-versus-mid { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px 12px; border-left: 1px solid var(--border); border-right: 1px solid var(--border); gap: 10px; }
+.lpq-vs-rail { flex: 1; width: 1px; background: var(--border); }
+.lpq-vs-text { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.12em; color: #1E3A5F; writing-mode: vertical-rl; }
+.lpq-gates-intro { text-align: center; margin-bottom: 40px; }
+.lpq-gates-intro p { font-size: 15px; color: var(--muted-2); line-height: 1.7; }
+.lpq-gates-intro p strong { color: var(--gold); }
+.lpq-gates { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 56px; }
+.lpq-gate { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; display: flex; align-items: flex-start; gap: 16px; position: relative; overflow: hidden; transition: border-color 0.25s, transform 0.22s; }
+.lpq-gate:hover { border-color: rgba(37,99,235,0.35); transform: translateY(-3px); }
+.lpq-gate::after { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(180deg, var(--blue), var(--blue-light)); border-radius: 3px 0 0 3px; opacity: 0; transition: opacity 0.25s; }
+.lpq-gate:hover::after { opacity: 1; }
+.lpq-gate-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: rgba(37,99,235,0.15); line-height: 1; flex-shrink: 0; min-width: 28px; margin-top: 1px; }
+.lpq-gate-body { flex: 1; }
+.lpq-gate-check { width: 22px; height: 22px; border-radius: 50%; background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.25); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--blue-light); flex-shrink: 0; margin-top: 3px; }
+.lpq-gate-title { font-size: 14px; font-weight: 800; color: var(--white); margin-bottom: 5px; line-height: 1.3; }
+.lpq-gate-title .accent { color: var(--blue-light); }
+.lpq-gate-title .gold   { color: var(--gold); }
+.lpq-gate-desc { font-size: 12px; color: var(--muted-2); line-height: 1.6; margin-bottom: 8px; }
+.lpq-gate-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2); color: var(--blue-light); }
+.lpq-metrics { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--card); border: 1px solid var(--border); border-top: 2px solid var(--blue); border-radius: 16px; overflow: hidden; }
+.lpq-metric { padding: 28px 20px; text-align: center; border-right: 1px solid var(--border); }
+.lpq-metric:last-child { border-right: none; }
+.lpq-metric-num { font-family: 'Bebas Neue', sans-serif; font-size: 44px; letter-spacing: 0.03em; color: var(--blue-light); line-height: 1; margin-bottom: 6px; }
+.lpq-metric-num.gold { color: var(--gold); }
+.lpq-metric-label { font-size: 12px; color: var(--muted-2); font-weight: 600; line-height: 1.4; }
+.lpq-metric-label strong { display: block; color: #475569; font-size: 11px; margin-top: 2px; font-weight: 500; }
+@media (max-width: 900px) {
+  .lpq-versus { grid-template-columns: 1fr; }
+  .lpq-versus-mid { flex-direction: row; padding: 10px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); border-left: none; border-right: none; }
+  .lpq-vs-rail { width: auto; height: 1px; flex: 1; }
+  .lpq-vs-text { writing-mode: horizontal-tb; }
+  .lpq-metrics { grid-template-columns: 1fr 1fr; }
+  .lpq-metric:nth-child(2) { border-right: none; }
+  .lpq-metric:nth-child(3), .lpq-metric:nth-child(4) { border-top: 1px solid var(--border); }
+  .lpq-metric:nth-child(4) { border-right: none; }
+}
+@media (max-width: 600px) {
+  .lpq-gates { grid-template-columns: 1fr; }
+  .lpq-versus-col { padding: 24px 20px; }
+}
 
 /* ═══════════════════════════
-   DOWNLOADS
+   FIX: DOWNLOAD GATE STYLES
+   Downloads now open WhatsApp instead of direct links
    ═══════════════════════════ */
 .downloads-section { background: var(--navy-2); }
 
@@ -967,20 +787,10 @@ section { padding: 88px 0; position: relative; z-index: 1; }
   letter-spacing: 0.03em;
 }
 
-.db-blue {
-  background: var(--blue);
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(37,99,235,0.25);
-}
-
+.db-blue { background: var(--blue); color: #fff; box-shadow: 0 4px 16px rgba(37,99,235,0.25); }
 .db-blue:hover { background: var(--blue-mid); transform: translateY(-2px); }
 
-.db-gold {
-  background: linear-gradient(135deg, var(--gold), #D97706);
-  color: #0B0800;
-  box-shadow: 0 4px 16px rgba(245,158,11,0.2);
-}
-
+.db-gold { background: linear-gradient(135deg, var(--gold), #D97706); color: #0B0800; box-shadow: 0 4px 16px rgba(245,158,11,0.2); }
 .db-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,158,11,0.3); }
 
 .download-note {
@@ -991,7 +801,7 @@ section { padding: 88px 0; position: relative; z-index: 1; }
 }
 
 /* ═══════════════════════════
-   HONEST TRUTH BRIDGE
+   BRIDGE
    ═══════════════════════════ */
 .bridge-section { background: var(--navy-3); }
 
@@ -1021,7 +831,6 @@ section { padding: 88px 0; position: relative; z-index: 1; }
 }
 
 .bridge-card p:last-of-type { margin-bottom: 28px; }
-
 .bridge-card p strong { color: var(--white); }
 
 /* ═══════════════════════════
@@ -1042,22 +851,12 @@ section { padding: 88px 0; position: relative; z-index: 1; }
 }
 
 .cs-stat { flex: 1; text-align: center; min-width: 100px; padding: 8px; }
-.cs-stat-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 44px;
-  color: var(--blue-light);
-  line-height: 1;
-  margin-bottom: 4px;
-}
+.cs-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--blue-light); line-height: 1; margin-bottom: 4px; }
 .cs-stat-label { font-size: 12px; color: var(--muted-2); font-weight: 600; }
 .cs-stat-city { font-size: 11px; color: var(--muted); font-weight: 700; margin-top: 1px; }
 .cs-div { width: 1px; height: 40px; background: var(--border); flex-shrink: 0; }
 
-.cases-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
+.cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
 .case-card {
   background: var(--card);
@@ -1079,10 +878,7 @@ section { padding: 88px 0; position: relative; z-index: 1; }
   background: linear-gradient(90deg, var(--blue), var(--blue-light));
 }
 
-.case-featured {
-  border-color: rgba(37,99,235,0.3);
-  background: linear-gradient(160deg, var(--card) 70%, rgba(37,99,235,0.04) 100%);
-}
+.case-featured { border-color: rgba(37,99,235,0.3); background: linear-gradient(160deg, var(--card) 70%, rgba(37,99,235,0.04) 100%); }
 
 .case-featured-label {
   display: inline-block;
@@ -1097,150 +893,33 @@ section { padding: 88px 0; position: relative; z-index: 1; }
   margin-bottom: 16px;
 }
 
-.case-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 18px;
-  gap: 10px;
-}
-
+.case-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; gap: 10px; }
 .case-profile { display: flex; align-items: center; gap: 10px; }
-
-.case-avatar {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: rgba(37,99,235,0.1);
-  border: 1px solid rgba(37,99,235,0.2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--blue-light);
-  flex-shrink: 0;
-}
-
+.case-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: var(--blue-light); flex-shrink: 0; }
 .case-name { font-size: 14px; font-weight: 700; color: var(--white); }
 .case-location { font-size: 11px; color: var(--muted-2); margin-top: 1px; }
-
-.case-pkg {
-  font-size: 10px;
-  font-weight: 800;
-  color: var(--blue-light);
-  background: rgba(37,99,235,0.08);
-  border: 1px solid rgba(37,99,235,0.15);
-  padding: 4px 10px;
-  border-radius: 100px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.case-problem {
-  background: rgba(255,255,255,0.02);
-  border-radius: 10px;
-  padding: 12px 14px;
-  margin-bottom: 16px;
-}
-
-.case-problem-label {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 5px;
-}
-
+.case-pkg { font-size: 10px; font-weight: 800; color: var(--blue-light); background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.15); padding: 4px 10px; border-radius: 100px; white-space: nowrap; flex-shrink: 0; }
+.case-problem { background: rgba(255,255,255,0.02); border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; }
+.case-problem-label { font-size: 9px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
 .case-problem p { font-size: 12px; color: #64748B; line-height: 1.5; margin: 0; }
-
-.case-result {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  margin-bottom: 16px;
-}
-
-.case-result-num {
-  text-align: center;
-  background: rgba(37,99,235,0.07);
-  border-radius: 12px;
-  padding: 12px 14px;
-  flex-shrink: 0;
-  min-width: 70px;
-}
-
-.case-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 34px;
-  color: var(--blue-light);
-  line-height: 1;
-  margin-bottom: 3px;
-}
-
+.case-result { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+.case-result-num { text-align: center; background: rgba(37,99,235,0.07); border-radius: 12px; padding: 12px 14px; flex-shrink: 0; min-width: 70px; }
+.case-num { font-family: 'Bebas Neue', sans-serif; font-size: 34px; color: var(--blue-light); line-height: 1; margin-bottom: 3px; }
 .case-num-label { font-size: 10px; color: var(--muted-2); line-height: 1.3; }
-
 .case-quote { flex: 1; }
-
-.case-quote-mark {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 40px;
-  color: var(--gold);
-  line-height: 0.6;
-  margin-bottom: 6px;
-  display: block;
-  opacity: 0.5;
-}
-
+.case-quote-mark { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--gold); line-height: 0.6; margin-bottom: 6px; display: block; opacity: 0.5; }
 .case-quote p { font-size: 12px; color: #94A3B8; line-height: 1.6; font-style: italic; margin: 0; }
-
-.case-verified {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-  padding-top: 14px;
-}
-
-.verified-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 2px rgba(34,197,94,0.15);
-  flex-shrink: 0;
-}
+.case-verified { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 14px; }
+.verified-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 2px rgba(34,197,94,0.15); flex-shrink: 0; }
 
 /* ═══════════════════════════
    BONUSES
    ═══════════════════════════ */
 .bonuses-section { background: var(--navy-3); }
-
-.bonuses-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-top: 48px;
-}
-
-.bonus-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 28px;
-  transition: transform 0.25s, border-color 0.25s;
-  position: relative;
-  overflow: hidden;
-}
-
+.bonuses-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 48px; }
+.bonus-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 28px; transition: transform 0.25s, border-color 0.25s; position: relative; overflow: hidden; }
 .bonus-card:hover { transform: translateY(-3px); }
-
-.bonus-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 3px;
-}
-
+.bonus-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; }
 .bc-1::before { background: linear-gradient(90deg, var(--gold), #FCD34D); }
 .bc-1:hover    { border-color: rgba(245,158,11,0.25); }
 .bc-2::before  { background: linear-gradient(90deg, var(--green), #86EFAC); }
@@ -1251,204 +930,36 @@ section { padding: 88px 0; position: relative; z-index: 1; }
 .bc-4:hover    { border-color: rgba(168,85,247,0.25); }
 .bc-5::before  { background: linear-gradient(90deg, #EC4899, #F9A8D4); }
 .bc-5:hover    { border-color: rgba(236,72,153,0.25); }
-
-.bonus-card-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
-.bonus-card-icon {
-  width: 46px; height: 46px;
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
-  flex-shrink: 0;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-.bonus-card-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  letter-spacing: 0.03em;
-  color: var(--white);
-  line-height: 1.05;
-  margin-bottom: 3px;
-}
-
-.bonus-value-tag {
-  font-size: 10px;
-  font-weight: 800;
-  color: var(--muted-2);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.bonus-divider {
-  height: 1px;
-  background: var(--border);
-  margin-bottom: 16px;
-}
-
-.bonus-problem {
-  background: rgba(239,68,68,0.04);
-  border: 1px solid rgba(239,68,68,0.1);
-  border-radius: 8px;
-  padding: 10px 14px;
-  margin-bottom: 14px;
-}
-
-.bp-label {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #F87171;
-  margin-bottom: 5px;
-}
-
+.bonus-card-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+.bonus-card-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
+.bonus-card-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.03em; color: var(--white); line-height: 1.05; margin-bottom: 3px; }
+.bonus-value-tag { font-size: 10px; font-weight: 800; color: var(--muted-2); letter-spacing: 0.08em; text-transform: uppercase; }
+.bonus-divider { height: 1px; background: var(--border); margin-bottom: 16px; }
+.bonus-problem { background: rgba(239,68,68,0.04); border: 1px solid rgba(239,68,68,0.1); border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; }
+.bp-label { font-size: 9px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #F87171; margin-bottom: 5px; }
 .bp-text { font-size: 12px; color: #6B7280; line-height: 1.5; }
-
 .bonus-solution { display: flex; flex-direction: column; gap: 7px; }
-
-.bs-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 12px;
-  color: #94A3B8;
-  line-height: 1.5;
-}
-
-.bs-check {
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 8px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
+.bs-item { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: #94A3B8; line-height: 1.5; }
+.bs-check { width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; flex-shrink: 0; margin-top: 1px; }
 
 /* ═══════════════════════════
    GUARANTEE
    ═══════════════════════════ */
 .guarantee-section { background: var(--navy-2); }
-
-.guarantee-story-card {
-  background: linear-gradient(135deg, rgba(34,197,94,0.05) 0%, rgba(34,197,94,0.02) 100%);
-  border: 1px solid rgba(34,197,94,0.2);
-  border-radius: 20px;
-  padding: 44px;
-  margin: 40px 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.guarantee-story-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 4px;
-  background: linear-gradient(90deg, var(--green), #86EFAC);
-}
-
-.guarantee-story-card::after {
-  content: '✓';
-  position: absolute;
-  bottom: -20px; right: -10px;
-  font-size: 160px;
-  color: rgba(34,197,94,0.04);
-  font-weight: 900;
-  line-height: 1;
-  pointer-events: none;
-}
-
-.guarantee-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: rgba(34,197,94,0.1);
-  border: 1px solid rgba(34,197,94,0.2);
-  color: #4ADE80;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 5px 14px;
-  border-radius: 100px;
-  margin-bottom: 20px;
-}
-
-.gey-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-.guarantee-story-card h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 36px;
-  letter-spacing: 0.03em;
-  color: var(--white);
-  margin-bottom: 20px;
-  line-height: 1.05;
-}
-
-.guarantee-story-card p {
-  font-size: 16px;
-  color: #94A3B8;
-  line-height: 1.8;
-  margin-bottom: 16px;
-}
-
+.guarantee-story-card { background: linear-gradient(135deg, rgba(34,197,94,0.05) 0%, rgba(34,197,94,0.02) 100%); border: 1px solid rgba(34,197,94,0.2); border-radius: 20px; padding: 44px; margin: 40px 0; position: relative; overflow: hidden; }
+.guarantee-story-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--green), #86EFAC); }
+.guarantee-story-card::after { content: '✓'; position: absolute; bottom: -20px; right: -10px; font-size: 160px; color: rgba(34,197,94,0.04); font-weight: 900; line-height: 1; pointer-events: none; }
+.guarantee-eyebrow { display: inline-flex; align-items: center; gap: 7px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: #4ADE80; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 20px; }
+.gey-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 1.5s ease-in-out infinite; }
+.guarantee-story-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 0.03em; color: var(--white); margin-bottom: 20px; line-height: 1.05; }
+.guarantee-story-card p { font-size: 16px; color: #94A3B8; line-height: 1.8; margin-bottom: 16px; }
 .guarantee-story-card p em { color: #6B7280; }
-
-.guarantee-outcome {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background: rgba(34,197,94,0.08);
-  border-radius: 12px;
-  padding: 18px 20px;
-  margin-top: 24px;
-}
-
+.guarantee-outcome { display: flex; align-items: flex-start; gap: 12px; background: rgba(34,197,94,0.08); border-radius: 12px; padding: 18px 20px; margin-top: 24px; }
 .go-icon { font-size: 24px; flex-shrink: 0; }
-
 .go-text { font-size: 14px; color: #166534; font-weight: 600; line-height: 1.6; }
-
-.guarantee-box {
-  background: var(--card-2);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 36px 40px;
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-
-.guarantee-shield {
-  width: 72px; height: 72px;
-  background: linear-gradient(135deg, var(--green), #16A34A);
-  border-radius: 18px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 34px;
-  flex-shrink: 0;
-  box-shadow: 0 8px 24px rgba(34,197,94,0.25);
-}
-
-.guarantee-box-text h4 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 26px;
-  letter-spacing: 0.03em;
-  color: var(--white);
-  margin-bottom: 10px;
-}
-
+.guarantee-box { background: var(--card-2); border: 1px solid var(--border); border-radius: 18px; padding: 36px 40px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+.guarantee-shield { width: 72px; height: 72px; background: linear-gradient(135deg, var(--green), #16A34A); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 34px; flex-shrink: 0; box-shadow: 0 8px 24px rgba(34,197,94,0.25); }
+.guarantee-box-text h4 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.03em; color: var(--white); margin-bottom: 10px; }
 .guarantee-box-text p { font-size: 15px; color: #94A3B8; line-height: 1.7; margin: 0; }
 .guarantee-box-text p strong { color: #4ADE80; }
 
@@ -1456,367 +967,86 @@ section { padding: 88px 0; position: relative; z-index: 1; }
    OFFER PACKAGES
    ═══════════════════════════ */
 .offer-section { background: var(--navy-3); }
-
-.offer-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 48px;
-  align-items: start;
-}
-
-.offer-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.25s, box-shadow 0.25s;
-}
-
+.offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; align-items: start; }
+.offer-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; position: relative; transition: transform 0.25s, box-shadow 0.25s; }
 .offer-card:hover { transform: translateY(-5px); }
-
-.offer-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 3px;
-}
-
+.offer-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; }
 .oc-trial::before  { background: linear-gradient(90deg, #60A5FA, #93C5FD); }
 .oc-proto::before  { background: linear-gradient(90deg, var(--blue), var(--blue-light)); }
 .oc-elite::before  { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
-
-.oc-proto {
-  border-color: rgba(37,99,235,0.35);
-  box-shadow: 0 0 0 1px rgba(37,99,235,0.15), 0 16px 48px rgba(37,99,235,0.1);
-}
-
-.oc-elite {
-  border-color: rgba(245,158,11,0.25);
-}
-
-.offer-popular {
-  text-align: center;
-  background: linear-gradient(135deg, var(--blue), var(--blue-mid));
-  color: #fff;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 7px;
-}
-
+.oc-proto { border-color: rgba(37,99,235,0.35); box-shadow: 0 0 0 1px rgba(37,99,235,0.15), 0 16px 48px rgba(37,99,235,0.1); }
+.oc-elite { border-color: rgba(245,158,11,0.25); }
+.offer-popular { text-align: center; background: linear-gradient(135deg, var(--blue), var(--blue-mid)); color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px; }
 .offer-head { padding: 28px 26px 22px; border-bottom: 1px solid var(--border); }
-
-.offer-tag {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  display: block;
-}
-
+.offer-tag { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; display: block; }
 .oc-trial  .offer-tag  { color: #93C5FD; }
 .oc-proto  .offer-tag  { color: var(--blue-light); }
 .oc-elite  .offer-tag  { color: var(--gold); }
-
-.offer-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 26px;
-  letter-spacing: 0.03em;
-  color: var(--white);
-  margin-bottom: 6px;
-  line-height: 1.05;
-}
-
+.offer-name { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.03em; color: var(--white); margin-bottom: 6px; line-height: 1.05; }
 .offer-tagline { font-size: 13px; color: var(--muted-2); line-height: 1.5; margin-bottom: 20px; }
-
-.offer-price-main {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 44px;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
+.offer-price-main { font-family: 'Bebas Neue', sans-serif; font-size: 44px; line-height: 1; margin-bottom: 4px; }
 .oc-trial  .offer-price-main { color: #93C5FD; }
 .oc-proto  .offer-price-main { color: var(--blue-light); }
 .oc-elite  .offer-price-main { color: var(--gold); }
-
 .offer-price-note { font-size: 12px; color: var(--muted); font-weight: 600; }
-
-.offer-price-total {
-  margin-top: 12px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  font-size: 12px;
-  color: #94A3B8;
-  line-height: 1.5;
-}
-
+.offer-price-total { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 12px; color: #94A3B8; line-height: 1.5; }
 .oc-proto .offer-price-total { background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.12); }
 .oc-elite .offer-price-total { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.12); }
-
 .offer-price-total strong { font-weight: 800; }
 .oc-proto .offer-price-total strong { color: var(--blue-light); }
 .oc-elite .offer-price-total strong { color: var(--gold); }
-
-.upgrade-note {
-  margin-top: 10px;
-  padding: 10px 12px;
-  background: rgba(34,197,94,0.05);
-  border: 1px solid rgba(34,197,94,0.15);
-  border-radius: 8px;
-  font-size: 11px;
-  color: #4ADE80;
-  line-height: 1.6;
-}
-
+.upgrade-note { margin-top: 10px; padding: 10px 12px; background: rgba(34,197,94,0.05); border: 1px solid rgba(34,197,94,0.15); border-radius: 8px; font-size: 11px; color: #4ADE80; line-height: 1.6; }
 .offer-body { padding: 22px 26px 28px; }
-
-.offer-features-label {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
-
+.offer-features-label { font-size: 9px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
 .offer-features { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 4px; }
-
-.offer-features li {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 12px;
-  color: #94A3B8;
-  line-height: 1.5;
-}
-
-.of-check {
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: rgba(34,197,94,0.1);
-  border: 1px solid rgba(34,197,94,0.2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 8px;
-  color: var(--green);
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
+.offer-features li { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: #94A3B8; line-height: 1.5; }
+.of-check { width: 16px; height: 16px; border-radius: 50%; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); display: flex; align-items: center; justify-content: center; font-size: 8px; color: var(--green); flex-shrink: 0; margin-top: 1px; }
 .offer-features li strong { color: #D1D5DB; font-weight: 600; }
-
-.offer-guarantee-strip {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  margin-top: 18px;
-  padding: 12px 14px;
-  background: rgba(34,197,94,0.04);
-  border: 1px solid rgba(34,197,94,0.12);
-  border-radius: 10px;
-}
-
+.offer-guarantee-strip { display: flex; align-items: flex-start; gap: 8px; margin-top: 18px; padding: 12px 14px; background: rgba(34,197,94,0.04); border: 1px solid rgba(34,197,94,0.12); border-radius: 10px; }
 .ogs-icon { font-size: 16px; flex-shrink: 0; }
 .ogs-text { font-size: 11px; color: #4B5563; line-height: 1.55; }
 .ogs-text strong { color: #22C55E; }
-
-.offer-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  margin-top: 20px;
-  padding: 16px 20px;
-  border-radius: 10px;
-  font-family: 'Epilogue', sans-serif;
-  font-size: 14px;
-  font-weight: 800;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  transition: all 0.22s;
-  letter-spacing: 0.02em;
-}
-
+.offer-cta { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 20px; padding: 16px 20px; border-radius: 10px; font-family: 'Epilogue', sans-serif; font-size: 14px; font-weight: 800; text-decoration: none; cursor: pointer; border: none; transition: all 0.22s; letter-spacing: 0.02em; }
 .oc-trial .offer-cta  { background: transparent; border: 1px solid rgba(96,165,250,0.25); color: #93C5FD; }
 .oc-trial .offer-cta:hover { border-color: #60A5FA; color: var(--blue-light); background: rgba(37,99,235,0.05); }
-
 .oc-proto .offer-cta  { background: var(--blue); color: #fff; box-shadow: 0 6px 20px rgba(37,99,235,0.3); }
 .oc-proto .offer-cta:hover { background: var(--blue-mid); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,99,235,0.4); }
-
 .oc-elite .offer-cta  { background: linear-gradient(135deg, var(--gold), #D97706); color: #0B0800; box-shadow: 0 6px 20px rgba(245,158,11,0.25); }
 .oc-elite .offer-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(245,158,11,0.35); }
-
-.offer-cta .oc-arrow {
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px;
-}
+.offer-cta .oc-arrow { width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 12px; }
 
 /* ═══════════════════════════
-   FINAL CLOSE
+   CLOSE & FOOTER
    ═══════════════════════════ */
-.close-section {
-  background: linear-gradient(160deg, var(--navy-3) 0%, #050A18 100%);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.close-section::before {
-  content: '';
-  position: absolute;
-  top: -100px; left: 50%;
-  transform: translateX(-50%);
-  width: 600px; height: 400px;
-  background: radial-gradient(ellipse, rgba(37,99,235,0.12) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.close-section::after {
-  content: '';
-  position: absolute;
-  bottom: -80px; right: -80px;
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 65%);
-  pointer-events: none;
-}
-
+.close-section { background: linear-gradient(160deg, var(--navy-3) 0%, #050A18 100%); text-align: center; position: relative; overflow: hidden; }
+.close-section::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(37,99,235,0.12) 0%, transparent 65%); pointer-events: none; }
+.close-section::after { content: ''; position: absolute; bottom: -80px; right: -80px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 65%); pointer-events: none; }
 .close-section .container { position: relative; z-index: 1; }
-
-.close-section h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(40px, 6vw, 68px);
-  letter-spacing: 0.03em;
-  color: var(--white);
-  line-height: 1;
-  margin-bottom: 20px;
-}
-
+.close-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 68px); letter-spacing: 0.03em; color: var(--white); line-height: 1; margin-bottom: 20px; }
 .close-section h2 .blue { color: var(--blue-light); }
 .close-section h2 .gold { color: var(--gold); }
-
-.close-section p {
-  font-size: 17px;
-  color: #64748B;
-  line-height: 1.8;
-  max-width: 600px;
-  margin: 0 auto 16px;
-}
-
+.close-section p { font-size: 17px; color: #64748B; line-height: 1.8; max-width: 600px; margin: 0 auto 16px; }
 .close-section p strong { color: #94A3B8; }
+.close-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 36px; }
+.close-scarcity { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: var(--gold); margin-top: 20px; }
+.cs-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); animation: pulse 1.5s ease-in-out infinite; }
 
-.close-cta-row {
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 36px;
-}
-
-.close-scarcity {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--gold);
-  margin-top: 20px;
-}
-
-.cs-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--gold);
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-/* ═══════════════════════════
-   FOOTER
-   ═══════════════════════════ */
-footer {
-  background: #030810;
-  border-top: 1px solid var(--border);
-  padding: 36px 0;
-  text-align: center;
-}
-
+footer { background: #030810; border-top: 1px solid var(--border); padding: 36px 0; text-align: center; }
 footer p { font-size: 13px; color: var(--muted); line-height: 1.7; }
 footer a { color: var(--blue-light); text-decoration: none; }
 footer a:hover { color: var(--gold); }
-
-.footer-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 24px;
-  letter-spacing: 0.08em;
-  color: var(--white);
-  margin-bottom: 12px;
-}
-
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 0.08em; color: var(--white); margin-bottom: 12px; }
 .footer-logo span { color: var(--gold); }
 
-/* ═══════════════════════════
-   DIVIDERS & HELPERS
-   ═══════════════════════════ */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin: 0;
-}
-
+.section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 0; }
 .text-center { text-align: center; }
+.cta-block { text-align: center; margin-top: 48px; padding: 48px 40px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; }
+.cta-block p { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 0.03em; color: var(--white); margin-bottom: 24px; line-height: 1.2; }
+.cta-block .scarcity-note { font-family: 'Epilogue', sans-serif; font-size: 13px; color: var(--muted-2); font-weight: 600; letter-spacing: 0; margin-top: 14px; margin-bottom: 0; }
 
-.cta-block {
-  text-align: center;
-  margin-top: 48px;
-  padding: 48px 40px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-}
+@keyframes fadeUp   { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: translateY(0); } }
 
-.cta-block p {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 30px;
-  letter-spacing: 0.03em;
-  color: var(--white);
-  margin-bottom: 24px;
-  line-height: 1.2;
-}
-
-.cta-block .scarcity-note {
-  font-family: 'Epilogue', sans-serif;
-  font-size: 13px;
-  color: var(--muted-2);
-  font-weight: 600;
-  letter-spacing: 0;
-  margin-top: 14px;
-  margin-bottom: 0;
-}
-
-/* ═══════════════════════════
-   ANIMATIONS
-   ═══════════════════════════ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-14px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ═══════════════════════════
-   RESPONSIVE
-   ═══════════════════════════ */
 @media (max-width: 860px) {
   .offer-grid     { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
   .cases-grid     { grid-template-columns: 1fr; }
@@ -1844,109 +1074,55 @@ footer a:hover { color: var(--gold); }
 </head>
 <body>
 
-<!-- Progress Bar -->
 <div class="progress-bar" id="progressBar"></div>
 
-<!-- Top Bar -->
 <nav class="top-bar">
   <div class="container top-bar-inner">
     <a href="#" class="top-bar-logo">Tubalcain <span>Agency</span></a>
-    <a href="#offer" class="top-bar-cta">
-      View DFY Packages
-      <span style="font-size:14px;">↓</span>
-    </a>
+    <a href="#offer" class="top-bar-cta">View DFY Packages <span style="font-size:14px;">↓</span></a>
   </div>
 </nav>
 
 
-<!-- ═══════════════════════════════════════
-     HERO
-     ═══════════════════════════════════════ -->
+<!-- HERO -->
 <section class="hero" id="top">
   <div class="container">
     <div class="hero-badge">
       <span class="badge-dot"></span>
       Qualified Installer Access — You Made It In
     </div>
-
-    <h1>
-      The <span class="blue">ABC Playbook</span><br>
-      Attract. Filter. <span class="gold">Convert.</span>
-    </h1>
-
-    <p class="hero-sub">
-      The exact system used to attract, filter and deliver 41 qualified solar homeowners
-      to one installer's WhatsApp in 7 days — fully documented and yours for free.
-      If you want us to build and run it for you, the DFY option is below.
-    </p>
-
+    <h1>The <span class="blue">ABC Playbook</span><br>Attract. Filter. <span class="gold">Convert.</span></h1>
+    <p class="hero-sub">The exact system used to attract, filter and deliver 41 qualified solar homeowners to one installer's WhatsApp in 7 days — fully documented and yours for free. If you want us to build and run it for you, the DFY option is below.</p>
     <div class="hero-value-grid">
       <div class="hero-value-item">
         <div class="hvi-icon" style="background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.2);">📘</div>
-        <div class="hvi-text">
-          <strong>The ABC Playbook PDF</strong>
-          <span>Complete step-by-step system — free download below</span>
-        </div>
+        <div class="hvi-text"><strong>The ABC Playbook PDF</strong><span>Complete step-by-step system — free download below</span></div>
       </div>
       <div class="hero-value-item">
         <div class="hvi-icon" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);">⚡</div>
-        <div class="hvi-text">
-          <strong>ABC Solar Load Calculator</strong>
-          <span>Professional site-visit tool — works offline on any device</span>
-        </div>
+        <div class="hvi-text"><strong>ABC Solar Load Calculator</strong><span>Professional site-visit tool — works offline on any device</span></div>
       </div>
       <div class="hero-value-item">
         <div class="hvi-icon" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);">🎬</div>
-        <div class="hvi-text">
-          <strong>Full System Video Walkthrough</strong>
-          <span>Watch the exact targeting and filtering logic explained</span>
-        </div>
+        <div class="hvi-text"><strong>Full System Video Walkthrough</strong><span>Watch the exact targeting and filtering logic explained</span></div>
       </div>
       <div class="hero-value-item">
         <div class="hvi-icon" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);">🏆</div>
-        <div class="hvi-text">
-          <strong>DFY Partner Option</strong>
-          <span>We build and run the system for you — leads in 48 hours</span>
-        </div>
+        <div class="hvi-text"><strong>DFY Partner Option</strong><span>We build and run the system for you — leads in 48 hours</span></div>
       </div>
     </div>
-
     <div class="hero-cta-row">
-      <a href="#playbook" class="btn btn-primary">
-        Get the Free Playbook
-        <span class="arrow">↓</span>
-      </a>
-      <a href="#offer" class="btn btn-gold">
-        Apply for DFY Partner Slot
-        <span class="arrow">→</span>
-      </a>
+      <a href="#playbook" class="btn btn-primary">Get the Free Playbook <span class="arrow">↓</span></a>
+      <a href="#offer" class="btn btn-gold">Apply for DFY Partner Slot <span class="arrow">→</span></a>
     </div>
-
-    <!-- Stats Bar -->
     <div class="stats-bar">
-      <div class="stat-item">
-        <div class="stat-num">41</div>
-        <div class="stat-label">Qualified Leads</div>
-        <div class="stat-sub">In 7 days — verified</div>
-      </div>
+      <div class="stat-item"><div class="stat-num">41</div><div class="stat-label">Qualified Leads</div><div class="stat-sub">In 7 days — verified</div></div>
       <div class="stat-div"></div>
-      <div class="stat-item">
-        <div class="stat-num">38%</div>
-        <div class="stat-label">Close Rate</div>
-        <div class="stat-sub">On pre-qualified leads</div>
-      </div>
+      <div class="stat-item"><div class="stat-num">38%</div><div class="stat-label">Close Rate</div><div class="stat-sub">On pre-qualified leads</div></div>
       <div class="stat-div"></div>
-      <div class="stat-item">
-        <div class="stat-num">&lt;1s</div>
-        <div class="stat-label">Lead Delivery</div>
-        <div class="stat-sub">SMS on qualification</div>
-      </div>
+      <div class="stat-item"><div class="stat-num">&lt;1s</div><div class="stat-label">Lead Delivery</div><div class="stat-sub">SMS on qualification</div></div>
       <div class="stat-div"></div>
-      <div class="stat-item">
-        <div class="stat-num">48h</div>
-        <div class="stat-label">To First Leads</div>
-        <div class="stat-sub">After DFY onboarding</div>
-      </div>
+      <div class="stat-item"><div class="stat-num">48h</div><div class="stat-label">To First Leads</div><div class="stat-sub">After DFY onboarding</div></div>
     </div>
   </div>
 </section>
@@ -1954,9 +1130,7 @@ footer a:hover { color: var(--gold); }
 <div class="section-divider"></div>
 
 
-<!-- ═══════════════════════════════════════
-     VIDEO PROOF
-     ═══════════════════════════════════════ -->
+<!-- VIDEO PROOF -->
 <section class="video-section" id="proof">
   <div class="container">
     <div class="section-eyebrow">Live Proof</div>
@@ -1967,12 +1141,11 @@ footer a:hover { color: var(--gold); }
 
       <div class="video-proof-card">
         <div class="video-thumb">
-          <iframe src="https://www.youtube-nocookie.com/embed/5xuoWGLVIT0?rel=0&modestbranding=1" title="41 Qualified Leads in a Week" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" onload="this.nextElementSibling.style.display='none'"></iframe>
-          <a href="https://youtu.be/5xuoWGLVIT0" target="_blank" rel="noopener" class="video-fallback">
-            <div class="vf-icon">▶️</div>
-            <div class="vf-text">41 Qualified Leads in 1 Week — Ad Account Proof</div>
-            <div class="vf-btn">Watch on YouTube</div>
-          </a>
+          <!-- FIX: Facade replaces eager iframe — YouTube JS only loads on click -->
+          <div class="yt-facade" data-videoid="5xuoWGLVIT0" onclick="loadYT(this)">
+            <img src="https://i.ytimg.com/vi/5xuoWGLVIT0/hqdefault.jpg" alt="41 Qualified Leads in 1 Week — Ad Account Proof" loading="lazy">
+            <div class="yt-play-btn"></div>
+          </div>
         </div>
         <div class="video-card-body">
           <div class="video-card-tag">⚡ Live Dashboard</div>
@@ -1982,12 +1155,10 @@ footer a:hover { color: var(--gold); }
 
       <div class="video-proof-card">
         <div class="video-thumb">
-          <iframe src="https://www.youtube-nocookie.com/embed/UZKEgFK0iqk?rel=0&modestbranding=1" title="38% Close Rate" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" onload="this.nextElementSibling.style.display='none'"></iframe>
-          <a href="https://youtu.be/UZKEgFK0iqk" target="_blank" rel="noopener" class="video-fallback">
-            <div class="vf-icon">▶️</div>
-            <div class="vf-text">38% Close Rate — 16 High-Ticket Jobs Tracked Live</div>
-            <div class="vf-btn">Watch on YouTube</div>
-          </a>
+          <div class="yt-facade" data-videoid="UZKEgFK0iqk" onclick="loadYT(this)">
+            <img src="https://i.ytimg.com/vi/UZKEgFK0iqk/hqdefault.jpg" alt="38% Close Rate — 16 High-Ticket Jobs Tracked Live" loading="lazy">
+            <div class="yt-play-btn"></div>
+          </div>
         </div>
         <div class="video-card-body">
           <div class="video-card-tag">📊 Pipeline Walkthrough</div>
@@ -1997,12 +1168,10 @@ footer a:hover { color: var(--gold); }
 
       <div class="video-proof-card">
         <div class="video-thumb">
-          <iframe src="https://www.youtube-nocookie.com/embed/9VmnikPJ4p0?rel=0&modestbranding=1" title="Before and After" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" onload="this.nextElementSibling.style.display='none'"></iframe>
-          <a href="https://youtu.be/9VmnikPJ4p0" target="_blank" rel="noopener" class="video-fallback">
-            <div class="vf-icon">▶️</div>
-            <div class="vf-text">Before: ₦12,000 (0 Leads) → After: 35 Qualified Leads</div>
-            <div class="vf-btn">Watch on YouTube</div>
-          </a>
+          <div class="yt-facade" data-videoid="9VmnikPJ4p0" onclick="loadYT(this)">
+            <img src="https://i.ytimg.com/vi/9VmnikPJ4p0/hqdefault.jpg" alt="Before: ₦12,000 (0 Leads) → After: 35 Qualified Leads" loading="lazy">
+            <div class="yt-play-btn"></div>
+          </div>
         </div>
         <div class="video-card-body">
           <div class="video-card-tag">📈 Before vs After</div>
@@ -2017,44 +1186,26 @@ footer a:hover { color: var(--gold); }
 <div class="section-divider"></div>
 
 
-<!-- ═══════════════════════════════════════
-     EDUCATION — ABC PLAYBOOK VIDEO
-     ═══════════════════════════════════════ -->
+<!-- EDUCATION VIDEO -->
 <section class="education-section" id="watch">
   <div class="container">
     <div class="section-eyebrow">The System Explained</div>
     <h2 class="section-title">Watch This <span>Before</span> You Download Anything</h2>
-    <p class="section-sub">
-      This video shows exactly how the ABC system attracts, filters and delivers pre-qualified homeowners
-      — the targeting, the conditional logic, and what happens the moment a lead qualifies on Facebook.
-    </p>
+    <p class="section-sub">This video shows exactly how the ABC system attracts, filters and delivers pre-qualified homeowners — the targeting, the conditional logic, and what happens the moment a lead qualifies on Facebook.</p>
 
     <div class="edu-video-wrap">
-      <iframe src="https://www.youtube-nocookie.com/embed/k0-bs3IeeUQ?rel=0&modestbranding=1" title="The ABC Playbook — Full System Walkthrough" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen onload="this.nextElementSibling.style.display='none'"></iframe>
-      <a href="https://youtu.be/k0-bs3IeeUQ" target="_blank" rel="noopener" class="video-fallback">
-        <div class="vf-icon">▶️</div>
-        <div class="vf-text">The ABC Playbook — Full System Walkthrough<br><span style="color:#94A3B8;font-weight:400;">Watch how we attract, filter &amp; deliver qualified solar homeowners</span></div>
-        <div class="vf-btn">Watch on YouTube</div>
-      </a>
+      <!-- FIX: Facade for main education video — biggest LCP offender -->
+      <div class="yt-facade" data-videoid="k0-bs3IeeUQ" onclick="loadYT(this)" style="aspect-ratio:16/9;">
+        <img src="https://i.ytimg.com/vi/k0-bs3IeeUQ/hqdefault.jpg" alt="The ABC Playbook — Full System Walkthrough" style="width:100%;aspect-ratio:16/9;object-fit:cover;">
+        <div class="yt-play-btn" style="width:80px;height:80px;"></div>
+      </div>
     </div>
 
     <div class="edu-learn-grid">
-      <div class="edu-learn-item">
-        <div class="eli-dot"></div>
-        <p><strong>How we identify serious buyers</strong> — property owners with confirmed budget and 30-day install readiness, before they ever see your number</p>
-      </div>
-      <div class="edu-learn-item">
-        <div class="eli-dot"></div>
-        <p><strong>The conditional logic</strong> inside the Facebook Instant Form that filters price shoppers and time-wasters at the ad level automatically</p>
-      </div>
-      <div class="edu-learn-item">
-        <div class="eli-dot"></div>
-        <p><strong>Why speed wins 80% of solar deals</strong> — our partners receive leads in real time via SMS the moment a homeowner qualifies</p>
-      </div>
-      <div class="edu-learn-item">
-        <div class="eli-dot"></div>
-        <p><strong>Why 38% close rate is achievable</strong> when the filtering is done correctly before the installer ever makes contact</p>
-      </div>
+      <div class="edu-learn-item"><div class="eli-dot"></div><p><strong>How we identify serious buyers</strong> — property owners with confirmed budget and 30-day install readiness, before they ever see your number</p></div>
+      <div class="edu-learn-item"><div class="eli-dot"></div><p><strong>The conditional logic</strong> inside the Facebook Instant Form that filters price shoppers and time-wasters at the ad level automatically</p></div>
+      <div class="edu-learn-item"><div class="eli-dot"></div><p><strong>Why speed wins 80% of solar deals</strong> — our partners receive leads in real time via SMS the moment a homeowner qualifies</p></div>
+      <div class="edu-learn-item"><div class="eli-dot"></div><p><strong>Why 38% close rate is achievable</strong> when the filtering is done correctly before the installer ever makes contact</p></div>
     </div>
   </div>
 </section>
@@ -2062,45 +1213,37 @@ footer a:hover { color: var(--gold); }
 <div class="section-divider"></div>
 
 
-<!-- ═══════════════════════════════════════
-     FREE DOWNLOADS
-     ═══════════════════════════════════════ -->
+<!-- FIX: DOWNLOADS — gated behind WhatsApp to capture conversation instead of silent exit -->
 <section class="downloads-section" id="playbook">
   <div class="container">
     <div class="section-eyebrow">Free Resources</div>
-    <h2 class="section-title">Download Your <span>Free Tools</span></h2>
-    <p class="section-sub">Everything you need to understand the system and run it yourself — or follow along while watching the video above.</p>
+    <h2 class="section-title">Get Your <span>Free Tools</span></h2>
+    <p class="section-sub">Send us a quick WhatsApp message to get instant access — we send the link directly to you and confirm whether your city slot is still open at the same time.</p>
 
     <div class="downloads-grid">
 
       <div class="download-card dc-blue">
         <div class="download-icon">📘</div>
         <h3>The ABC Playbook</h3>
-        <span class="dc-free">Free PDF Download</span>
-        <p>
-          The complete ABC filtering system — step by step. Attract homeowners who own their property
-          and have a confirmed budget. Filter every time-waster before they reach your phone.
-          Convert with the follow-up scripts that close 38% of qualified leads.
-        </p>
-        <a href="https://drive.google.com/file/d/1hqrM6K_QiOXVn97-KodPyu7VSIfG8xXI/view?usp=sharing" target="_blank" rel="noopener" class="download-btn db-blue">
-          📥 Download the ABC Playbook
+        <span class="dc-free">Free — Delivered via WhatsApp</span>
+        <p>The complete ABC filtering system — step by step. Attract homeowners with confirmed budgets. Filter every time-waster before they reach your phone. Convert with follow-up scripts that close 38% of qualified leads.</p>
+        <!-- FIX: WhatsApp gate — opens conversation, delivers resource, captures lead -->
+        <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20please%20send%20me%20the%20ABC%20Playbook%20PDF" target="_blank" rel="noopener" class="download-btn db-blue" data-resource="ABC Playbook PDF">
+          📥 Send Me the ABC Playbook
         </a>
-        <p class="download-note">PDF &nbsp;·&nbsp; Google Drive &nbsp;·&nbsp; Free</p>
+        <p class="download-note">We send the PDF link via WhatsApp instantly &nbsp;·&nbsp; Free</p>
       </div>
 
       <div class="download-card dc-gold">
         <div class="download-icon">⚡</div>
         <h3>ABC Solar Load Calculator</h3>
-        <span class="dc-free">Free Tool — Works Offline</span>
-        <p>
-          Professional interactive energy load calculator for site visits. Calculate exact system
-          requirements in minutes. Works offline on any device after bookmarking.
-          Used by certified solar installers across Nigeria.
-        </p>
-        <a href="https://tubalcainmy.github.io/The-ABC-Solar-load-Calculator/" target="_blank" rel="noopener" class="download-btn db-gold">
-          ⚡ Open the Load Calculator
+        <span class="dc-free">Free Tool — Delivered via WhatsApp</span>
+        <p>Professional interactive energy load calculator for site visits. Calculate exact system requirements in minutes. Works offline on any device after bookmarking. Used by certified solar installers across Nigeria.</p>
+        <!-- FIX: WhatsApp gate — same treatment -->
+        <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20please%20send%20me%20the%20Solar%20Load%20Calculator%20link" target="_blank" rel="noopener" class="download-btn db-gold" data-resource="Solar Load Calculator">
+          ⚡ Send Me the Calculator
         </a>
-        <p class="download-note">HTML Tool &nbsp;·&nbsp; Bookmark to use offline &nbsp;·&nbsp; Free</p>
+        <p class="download-note">We send the tool link via WhatsApp instantly &nbsp;·&nbsp; Free</p>
       </div>
 
     </div>
@@ -2109,28 +1252,16 @@ footer a:hover { color: var(--gold); }
 
 <div class="section-divider"></div>
 
-  <!-- ═══════════════════════════════════
-     STEP 2 — PASTE THIS <section>
-     ═══════════════════════════════════ -->
- 
+
+<!-- LEAD QUALITY -->
 <section class="lpq-section" id="lead-quality">
   <div class="container">
- 
-    <!-- Header -->
     <div class="lpq-eyebrow">Lead Quality Standard</div>
     <h2 class="lpq-title">Not All Leads<br>Are <span class="blue">Equal.</span><br>Ours Are <span class="gold">Different.</span></h2>
-    <p class="lpq-sub">
-      Before any homeowner reaches your WhatsApp, they have passed 8 quality gates.
-      This is what separates a conversion-ready lead from a wasted site visit.
-    </p>
- 
-    <!-- Versus strip -->
+    <p class="lpq-sub">Before any homeowner reaches your WhatsApp, they have passed 8 quality gates. This is what separates a conversion-ready lead from a wasted site visit.</p>
     <div class="lpq-versus">
- 
       <div class="lpq-versus-col lpq-bad">
-        <div class="lpq-versus-head bad">
-          <span>✕</span> Typical Agency Lead
-        </div>
+        <div class="lpq-versus-head bad"><span>✕</span> Typical Agency Lead</div>
         <div class="lpq-versus-list">
           <div class="lpq-versus-item bad-item"><div class="lpq-vi-dot x">✕</div><span>Renter with no authority to approve installation</span></div>
           <div class="lpq-versus-item bad-item"><div class="lpq-vi-dot x">✕</div><span>No install timeline — "still thinking about it"</span></div>
@@ -2140,17 +1271,13 @@ footer a:hover { color: var(--gold); }
           <div class="lpq-versus-item bad-item"><div class="lpq-vi-dot x">✕</div><span>Home unsuitable — roof, wiring, or shading issues</span></div>
         </div>
       </div>
- 
       <div class="lpq-versus-mid">
         <div class="lpq-vs-rail"></div>
         <div class="lpq-vs-text">VS</div>
         <div class="lpq-vs-rail"></div>
       </div>
- 
       <div class="lpq-versus-col lpq-good">
-        <div class="lpq-versus-head good">
-          <span>✓</span> Tubalcain Qualified Lead
-        </div>
+        <div class="lpq-versus-head good"><span>✓</span> Tubalcain Qualified Lead</div>
         <div class="lpq-versus-list">
           <div class="lpq-versus-item good-item"><div class="lpq-vi-dot check">✓</div><span>Property owner or authorised decision-maker confirmed</span></div>
           <div class="lpq-versus-item good-item"><div class="lpq-vi-dot check">✓</div><span>Installing within 30–90 days — committed timeline</span></div>
@@ -2160,143 +1287,36 @@ footer a:hover { color: var(--gold); }
           <div class="lpq-versus-item good-item"><div class="lpq-vi-dot check">✓</div><span>Home passed safety assessment — installation ready</span></div>
         </div>
       </div>
- 
     </div>
- 
-    <!-- 8 Quality Gates -->
-    <div class="lpq-gates-intro">
-      <p>Every lead passes <strong>8 quality gates</strong> before your phone rings. Here is exactly what each one confirms.</p>
-    </div>
- 
+    <div class="lpq-gates-intro"><p>Every lead passes <strong>8 quality gates</strong> before your phone rings. Here is exactly what each one confirms.</p></div>
     <div class="lpq-gates">
- 
-      <div class="lpq-gate">
-        <div class="lpq-gate-num">01</div>
-        <div class="lpq-gate-body">
-          <div class="lpq-gate-title">Installing Within <span class="accent">90 Days</span></div>
-          <div class="lpq-gate-desc">Not browsing. Not "maybe next year." Every lead has selected a specific 30-day or 90-day install window before we send them to you.</div>
-          <div class="lpq-gate-pill">No Timewasters</div>
-        </div>
-        <div class="lpq-gate-check">✓</div>
-      </div>
- 
-      <div class="lpq-gate">
-        <div class="lpq-gate-num">02</div>
-        <div class="lpq-gate-body">
-          <div class="lpq-gate-title"><span class="gold">₦1.5M+</span> Budget Confirmed</div>
-          <div class="lpq-gate-desc">Real buyers only. Budget is verified through our qualification flow — no underfunded enquiries or price shoppers reach your number.</div>
-          <div class="lpq-gate-pill">Serious Buyers</div>
-        </div>
-        <div class="lpq-gate-check">✓</div>
-      </div>
- 
-      <div class="lpq-gate">
-        <div class="lpq-gate-num">03</div>
-        <div class="lpq-gate-body">
-          <div class="lpq-gate-title">Property Owner or <span class="accent">Authorised</span></div>
-          <div class="lpq-gate-desc">Every lead owns the property or holds documented permission to install. Zero "I need to check with my landlord" situations.</div>
-          <div class="lpq-gate-pill">Decision Makers</div>
-        </div>
-        <div class="lpq-gate-check">✓</div>
-      </div>
- 
-      <div class="lpq-gate">
-        <div class="lpq-gate-num">04</div>
-        <div class="lpq-gate-body">
-          <div class="lpq-gate-title">Spending <span class="gold">₦30k+/Month</span> on Power</div>
-          <div class="lpq-gate-desc">The numbers make sense for them. Leads spending under ₦30,000 monthly on electricity and generator fuel are automatically disqualified.</div>
-          <div class="lpq-gate-pill">ROI Makes Sense</div>
-        </div>
-        <div class="lpq-gate-check">✓</div>
-      </div>
- 
-      <div class="lpq-gate">
-        <div class="lpq-gate-num">05</div>
-        <div class="lpq-gate-body">
-          <div class="lpq-gate-title">Home <span class="accent">Passed Safety Check</span></div>
-          <div class="lpq-gate-desc">Roof condition, wiring capacity, and sunlight exposure all assessed. Homes that would fail post-installation are filtered before they reach you.</div>
-          <div class="lpq-gate-pill">Installation Ready</div>
-        </div>
-        <div class="lpq-gate-check">✓</div>
-      </div>
- 
-      <div class="lpq-gate">
-        <div class="lpq-gate-num">06</div>
-        <div class="lpq-gate-body">
-          <div class="lpq-gate-title"><span class="accent">Actively Seeking</span> Quotes</div>
-          <div class="lpq-gate-desc">Not a cold contact. They initiated the process — filled out a form, answered 13 questions, and are ready to hear from a professional installer.</div>
-          <div class="lpq-gate-pill">Hot Leads</div>
-        </div>
-        <div class="lpq-gate-check">✓</div>
-      </div>
- 
-      <div class="lpq-gate">
-        <div class="lpq-gate-num">07</div>
-        <div class="lpq-gate-body">
-          <div class="lpq-gate-title">Within Your <span class="accent">Service Territory</span></div>
-          <div class="lpq-gate-desc">Location is confirmed at signup. Every lead is geographically matched to your active service area. No wasted journeys.</div>
-          <div class="lpq-gate-pill">Location Matched</div>
-        </div>
-        <div class="lpq-gate-check">✓</div>
-      </div>
- 
-      <div class="lpq-gate">
-        <div class="lpq-gate-num">08</div>
-        <div class="lpq-gate-body">
-          <div class="lpq-gate-title">Expecting Your <span class="gold">Call</span></div>
-          <div class="lpq-gate-desc">They gave their WhatsApp willingly. They know a certified installer will contact them. They understand the next step is an energy assessment — not a surprise pitch.</div>
-          <div class="lpq-gate-pill">Pre-Warmed Buyers</div>
-        </div>
-        <div class="lpq-gate-check">✓</div>
-      </div>
- 
+      <div class="lpq-gate"><div class="lpq-gate-num">01</div><div class="lpq-gate-body"><div class="lpq-gate-title">Installing Within <span class="accent">90 Days</span></div><div class="lpq-gate-desc">Not browsing. Not "maybe next year." Every lead has selected a specific 30-day or 90-day install window before we send them to you.</div><div class="lpq-gate-pill">No Timewasters</div></div><div class="lpq-gate-check">✓</div></div>
+      <div class="lpq-gate"><div class="lpq-gate-num">02</div><div class="lpq-gate-body"><div class="lpq-gate-title"><span class="gold">₦1.5M+</span> Budget Confirmed</div><div class="lpq-gate-desc">Real buyers only. Budget is verified through our qualification flow — no underfunded enquiries or price shoppers reach your number.</div><div class="lpq-gate-pill">Serious Buyers</div></div><div class="lpq-gate-check">✓</div></div>
+      <div class="lpq-gate"><div class="lpq-gate-num">03</div><div class="lpq-gate-body"><div class="lpq-gate-title">Property Owner or <span class="accent">Authorised</span></div><div class="lpq-gate-desc">Every lead owns the property or holds documented permission to install. Zero "I need to check with my landlord" situations.</div><div class="lpq-gate-pill">Decision Makers</div></div><div class="lpq-gate-check">✓</div></div>
+      <div class="lpq-gate"><div class="lpq-gate-num">04</div><div class="lpq-gate-body"><div class="lpq-gate-title">Spending <span class="gold">₦30k+/Month</span> on Power</div><div class="lpq-gate-desc">The numbers make sense for them. Leads spending under ₦30,000 monthly on electricity and generator fuel are automatically disqualified.</div><div class="lpq-gate-pill">ROI Makes Sense</div></div><div class="lpq-gate-check">✓</div></div>
+      <div class="lpq-gate"><div class="lpq-gate-num">05</div><div class="lpq-gate-body"><div class="lpq-gate-title">Home <span class="accent">Passed Safety Check</span></div><div class="lpq-gate-desc">Roof condition, wiring capacity, and sunlight exposure all assessed. Homes that would fail post-installation are filtered before they reach you.</div><div class="lpq-gate-pill">Installation Ready</div></div><div class="lpq-gate-check">✓</div></div>
+      <div class="lpq-gate"><div class="lpq-gate-num">06</div><div class="lpq-gate-body"><div class="lpq-gate-title"><span class="accent">Actively Seeking</span> Quotes</div><div class="lpq-gate-desc">Not a cold contact. They initiated the process — filled out a form, answered 13 questions, and are ready to hear from a professional installer.</div><div class="lpq-gate-pill">Hot Leads</div></div><div class="lpq-gate-check">✓</div></div>
+      <div class="lpq-gate"><div class="lpq-gate-num">07</div><div class="lpq-gate-body"><div class="lpq-gate-title">Within Your <span class="accent">Service Territory</span></div><div class="lpq-gate-desc">Location is confirmed at signup. Every lead is geographically matched to your active service area. No wasted journeys.</div><div class="lpq-gate-pill">Location Matched</div></div><div class="lpq-gate-check">✓</div></div>
+      <div class="lpq-gate"><div class="lpq-gate-num">08</div><div class="lpq-gate-body"><div class="lpq-gate-title">Expecting Your <span class="gold">Call</span></div><div class="lpq-gate-desc">They gave their WhatsApp willingly. They know a certified installer will contact them. They understand the next step is an energy assessment — not a surprise pitch.</div><div class="lpq-gate-pill">Pre-Warmed Buyers</div></div><div class="lpq-gate-check">✓</div></div>
     </div>
- 
-    <!-- Metrics -->
     <div class="lpq-metrics">
-      <div class="lpq-metric">
-        <div class="lpq-metric-num">13</div>
-        <div class="lpq-metric-label">Qualification Questions<strong>Every lead answers all 13</strong></div>
-      </div>
-      <div class="lpq-metric">
-        <div class="lpq-metric-num">8</div>
-        <div class="lpq-metric-label">Quality Gates<strong>Must pass every single one</strong></div>
-      </div>
-      <div class="lpq-metric">
-        <div class="lpq-metric-num gold">38%</div>
-        <div class="lpq-metric-label">Average Close Rate<strong>Industry average is under 10%</strong></div>
-      </div>
-      <div class="lpq-metric">
-        <div class="lpq-metric-num">&lt;1s</div>
-        <div class="lpq-metric-label">Delivery Speed<strong>From qualification to your phone</strong></div>
-      </div>
+      <div class="lpq-metric"><div class="lpq-metric-num">13</div><div class="lpq-metric-label">Qualification Questions<strong>Every lead answers all 13</strong></div></div>
+      <div class="lpq-metric"><div class="lpq-metric-num">8</div><div class="lpq-metric-label">Quality Gates<strong>Must pass every single one</strong></div></div>
+      <div class="lpq-metric"><div class="lpq-metric-num gold">38%</div><div class="lpq-metric-label">Average Close Rate<strong>Industry average is under 10%</strong></div></div>
+      <div class="lpq-metric"><div class="lpq-metric-num">&lt;1s</div><div class="lpq-metric-label">Delivery Speed<strong>From qualification to your phone</strong></div></div>
     </div>
- 
   </div>
 </section>
 
 
-<!-- ═══════════════════════════════════════
-     HONEST TRUTH BRIDGE
-     ═══════════════════════════════════════ -->
+<!-- HONEST TRUTH BRIDGE -->
 <section class="bridge-section">
   <div class="container">
     <div class="bridge-card">
       <h3>Here Is the Honest Truth.</h3>
-      <p>
-        Most installers who download the Playbook implement about 30% of it before life gets in the way.
-        <strong>The ads need daily monitoring. The conditional logic needs calibration. The targeting needs testing.</strong>
-        It is not complicated — but it is time-consuming.
-      </p>
-      <p>
-        That is exactly why the DFY option exists. Everything you just downloaded —
-        we build and run for you professionally. Your first batch of qualified homeowners
-        can be delivered to your WhatsApp this week.
-      </p>
-      <a href="#offer" class="btn btn-primary">
-        Skip the Setup — Apply for DFY Now
-        <span class="arrow">→</span>
-      </a>
+      <p>Most installers who download the Playbook implement about 30% of it before life gets in the way. <strong>The ads need daily monitoring. The conditional logic needs calibration. The targeting needs testing.</strong> It is not complicated — but it is time-consuming.</p>
+      <p>That is exactly why the DFY option exists. Everything you just downloaded — we build and run for you professionally. Your first batch of qualified homeowners can be delivered to your WhatsApp this week.</p>
+      <a href="#offer" class="btn btn-primary">Skip the Setup — Apply for DFY Now <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -2304,164 +1324,51 @@ footer a:hover { color: var(--gold); }
 <div class="section-divider"></div>
 
 
-<!-- ═══════════════════════════════════════
-     CASE STUDIES
-     ═══════════════════════════════════════ -->
+<!-- CASE STUDIES -->
 <section class="cases-section" id="results">
   <div class="container">
     <div class="section-eyebrow">Real Results</div>
     <h2 class="section-title">What Happens in the <span>First 7 Days</span></h2>
     <p class="section-sub">No warm-up periods. No guesswork. Our partners see qualified leads hitting their WhatsApp in the first week — every time.</p>
-
     <div class="cases-stats">
-      <div class="cs-stat">
-        <div class="cs-stat-num">46</div>
-        <div class="cs-stat-label">Leads — Week 1</div>
-        <div class="cs-stat-city">Abuja Installer</div>
-      </div>
+      <div class="cs-stat"><div class="cs-stat-num">46</div><div class="cs-stat-label">Leads — Week 1</div><div class="cs-stat-city">Abuja Installer</div></div>
       <div class="cs-div"></div>
-      <div class="cs-stat">
-        <div class="cs-stat-num">17</div>
-        <div class="cs-stat-label">Leads in 6 Days</div>
-        <div class="cs-stat-city">Ibadan Installer</div>
-      </div>
+      <div class="cs-stat"><div class="cs-stat-num">17</div><div class="cs-stat-label">Leads in 6 Days</div><div class="cs-stat-city">Ibadan Installer</div></div>
       <div class="cs-div"></div>
-      <div class="cs-stat">
-        <div class="cs-stat-num">25+</div>
-        <div class="cs-stat-label">Leads — Week 1</div>
-        <div class="cs-stat-city">Warri Installer</div>
-      </div>
+      <div class="cs-stat"><div class="cs-stat-num">25+</div><div class="cs-stat-label">Leads — Week 1</div><div class="cs-stat-city">Warri Installer</div></div>
       <div class="cs-div"></div>
-      <div class="cs-stat">
-        <div class="cs-stat-num">100%</div>
-        <div class="cs-stat-label">Pre-Qualified</div>
-        <div class="cs-stat-city">Every single lead</div>
-      </div>
+      <div class="cs-stat"><div class="cs-stat-num">100%</div><div class="cs-stat-label">Pre-Qualified</div><div class="cs-stat-city">Every single lead</div></div>
     </div>
-
     <div class="cases-grid">
-
       <div class="case-card case-featured">
         <div class="case-featured-label">Most Recent Result</div>
-        <div class="case-top">
-          <div class="case-profile">
-            <div class="case-avatar">EH</div>
-            <div>
-              <div class="case-name">Eng. Hughes D.</div>
-              <div class="case-location">📍 Abuja &nbsp;·&nbsp; 11–25 installs/month</div>
-            </div>
-          </div>
-          <div class="case-pkg">Fast-Track Monthly</div>
-        </div>
-        <div class="case-problem">
-          <div class="case-problem-label">The Problem Before</div>
-          <p>Team capacity drained by time-waster site visits — homeowners who were never serious buyers.</p>
-        </div>
-        <div class="case-result">
-          <div class="case-result-num">
-            <div class="case-num">46</div>
-            <div class="case-num-label">qualified leads<br>in Week 1</div>
-          </div>
-          <div class="case-quote">
-            <span class="case-quote-mark">&ldquo;</span>
-            <p>His team lead confirmed after Week 1 that he's been very busy with the leads we've been sending — the exact problem we set out to solve.</p>
-          </div>
-        </div>
+        <div class="case-top"><div class="case-profile"><div class="case-avatar">EH</div><div><div class="case-name">Eng. Hughes D.</div><div class="case-location">📍 Abuja &nbsp;·&nbsp; 11–25 installs/month</div></div></div><div class="case-pkg">Fast-Track Monthly</div></div>
+        <div class="case-problem"><div class="case-problem-label">The Problem Before</div><p>Team capacity drained by time-waster site visits — homeowners who were never serious buyers.</p></div>
+        <div class="case-result"><div class="case-result-num"><div class="case-num">46</div><div class="case-num-label">qualified leads<br>in Week 1</div></div><div class="case-quote"><span class="case-quote-mark">&ldquo;</span><p>His team lead confirmed after Week 1 that he's been very busy with the leads we've been sending — the exact problem we set out to solve.</p></div></div>
         <div class="case-verified"><span class="verified-dot"></span> Verified — Google Sheet timestamps &amp; ad account data on file</div>
       </div>
-
       <div class="case-card">
-        <div class="case-top">
-          <div class="case-profile">
-            <div class="case-avatar">VO</div>
-            <div>
-              <div class="case-name">Victor O.</div>
-              <div class="case-location">📍 Ibadan/Oyo &nbsp;·&nbsp; 4–10 installs/month</div>
-            </div>
-          </div>
-          <div class="case-pkg">Proof of Concept</div>
-        </div>
-        <div class="case-problem">
-          <div class="case-problem-label">The Problem Before</div>
-          <p>Low close rate — leads arriving unprepared, unsure about budget, unwilling to commit.</p>
-        </div>
-        <div class="case-result">
-          <div class="case-result-num">
-            <div class="case-num">17</div>
-            <div class="case-num-label">leads in 6 days<br>(target was 15)</div>
-          </div>
-          <div class="case-quote">
-            <span class="case-quote-mark">&ldquo;</span>
-            <p>Exceeded the trial target. All 17 leads were pre-screened to his exact business qualifications before a single message was sent.</p>
-          </div>
-        </div>
+        <div class="case-top"><div class="case-profile"><div class="case-avatar">VO</div><div><div class="case-name">Victor O.</div><div class="case-location">📍 Ibadan/Oyo &nbsp;·&nbsp; 4–10 installs/month</div></div></div><div class="case-pkg">Proof of Concept</div></div>
+        <div class="case-problem"><div class="case-problem-label">The Problem Before</div><p>Low close rate — leads arriving unprepared, unsure about budget, unwilling to commit.</p></div>
+        <div class="case-result"><div class="case-result-num"><div class="case-num">17</div><div class="case-num-label">leads in 6 days<br>(target was 15)</div></div><div class="case-quote"><span class="case-quote-mark">&ldquo;</span><p>Exceeded the trial target. All 17 leads were pre-screened to his exact business qualifications before a single message was sent.</p></div></div>
         <div class="case-verified"><span class="verified-dot"></span> Verified — Proof of Concept trial period delivery data</div>
       </div>
-
       <div class="case-card">
-        <div class="case-top">
-          <div class="case-profile">
-            <div class="case-avatar">EP</div>
-            <div>
-              <div class="case-name">Eng. Pius</div>
-              <div class="case-location">📍 Warri &nbsp;·&nbsp; Standard Package</div>
-            </div>
-          </div>
-          <div class="case-pkg">Standard</div>
-        </div>
-        <div class="case-problem">
-          <div class="case-problem-label">The Problem Before</div>
-          <p>Inconsistent pipeline — too reliant on word of mouth with no reliable weekly lead flow.</p>
-        </div>
-        <div class="case-result">
-          <div class="case-result-num">
-            <div class="case-num">25+</div>
-            <div class="case-num-label">qualified leads<br>in Week 1</div>
-          </div>
-          <div class="case-quote">
-            <span class="case-quote-mark">&ldquo;</span>
-            <p>Results arrived so fast he had to pause the service to work through the backlog of leads we had already delivered.</p>
-          </div>
-        </div>
+        <div class="case-top"><div class="case-profile"><div class="case-avatar">EP</div><div><div class="case-name">Eng. Pius</div><div class="case-location">📍 Warri &nbsp;·&nbsp; Standard Package</div></div></div><div class="case-pkg">Standard</div></div>
+        <div class="case-problem"><div class="case-problem-label">The Problem Before</div><p>Inconsistent pipeline — too reliant on word of mouth with no reliable weekly lead flow.</p></div>
+        <div class="case-result"><div class="case-result-num"><div class="case-num">25+</div><div class="case-num-label">qualified leads<br>in Week 1</div></div><div class="case-quote"><span class="case-quote-mark">&ldquo;</span><p>Results arrived so fast he had to pause the service to work through the backlog of leads we had already delivered.</p></div></div>
         <div class="case-verified"><span class="verified-dot"></span> Verified — Standard package Week 1 delivery data on file</div>
       </div>
-
       <div class="case-card">
-        <div class="case-top">
-          <div class="case-profile">
-            <div class="case-avatar">DQ</div>
-            <div>
-              <div class="case-name">Dolapo Q.</div>
-              <div class="case-location">📍 Lagos &nbsp;·&nbsp; 4–10 installs/month</div>
-            </div>
-          </div>
-          <div class="case-pkg">Proof of Concept</div>
-        </div>
-        <div class="case-problem">
-          <div class="case-problem-label">The Problem Before</div>
-          <p>Not enough leads — pipeline dependent on referrals that dried up. Empty months becoming the norm.</p>
-        </div>
-        <div class="case-result">
-          <div class="case-result-num">
-            <div class="case-num">7</div>
-            <div class="case-num-label">days to more leads<br>than he could handle</div>
-          </div>
-          <div class="case-quote">
-            <span class="case-quote-mark">&ldquo;</span>
-            <p>By Day 7 his team had more qualified leads than they could handle — all from our Proof of Concept package alone.</p>
-          </div>
-        </div>
+        <div class="case-top"><div class="case-profile"><div class="case-avatar">DQ</div><div><div class="case-name">Dolapo Q.</div><div class="case-location">📍 Lagos &nbsp;·&nbsp; 4–10 installs/month</div></div></div><div class="case-pkg">Proof of Concept</div></div>
+        <div class="case-problem"><div class="case-problem-label">The Problem Before</div><p>Not enough leads — pipeline dependent on referrals that dried up. Empty months becoming the norm.</p></div>
+        <div class="case-result"><div class="case-result-num"><div class="case-num">7</div><div class="case-num-label">days to more leads<br>than he could handle</div></div><div class="case-quote"><span class="case-quote-mark">&ldquo;</span><p>By Day 7 his team had more qualified leads than they could handle — all from our Proof of Concept package alone.</p></div></div>
         <div class="case-verified"><span class="verified-dot"></span> Verified — Lead delivery timestamps on file</div>
       </div>
-
     </div>
-
     <div class="cta-block">
       <p>Every One of These Results Started With the Right DFY Package.</p>
-      <a href="#offer" class="btn btn-primary">
-        Choose Your DFY Package
-        <span class="arrow">→</span>
-      </a>
+      <a href="#offer" class="btn btn-primary">Choose Your DFY Package <span class="arrow">→</span></a>
       <p class="scarcity-note">Trial starts at ₦50,000 &nbsp;·&nbsp; First leads within 48 hours &nbsp;·&nbsp; Volume guaranteed</p>
     </div>
   </div>
@@ -2470,169 +1377,65 @@ footer a:hover { color: var(--gold); }
 <div class="section-divider"></div>
 
 
-<!-- ═══════════════════════════════════════
-     BONUS HIGHLIGHTS
-     ═══════════════════════════════════════ -->
+<!-- BONUSES -->
 <section class="bonuses-section" id="bonuses">
   <div class="container">
     <div class="section-eyebrow">Included With Every Package</div>
     <h2 class="section-title">Every Bonus. Every <span>Problem It Solves.</span></h2>
     <p class="section-sub">Every package comes with tools worth more than the package price itself. Here is exactly what each one does and why it matters.</p>
-
     <div class="bonuses-grid">
-
-      <!-- Bonus 1 -->
       <div class="bonus-card bc-1">
-        <div class="bonus-card-header">
-          <div class="bonus-card-icon">📋</div>
-          <div>
-            <div class="bonus-card-name">Authority Close Kit Vol. 1 &amp; 2</div>
-            <div class="bonus-value-tag">Value: ₦45,000 — Included Free</div>
-          </div>
-        </div>
+        <div class="bonus-card-header"><div class="bonus-card-icon">📋</div><div><div class="bonus-card-name">Authority Close Kit Vol. 1 &amp; 2</div><div class="bonus-value-tag">Value: ₦45,000 — Included Free</div></div></div>
         <div class="bonus-divider"></div>
-        <div class="bonus-problem">
-          <div class="bp-label">Problem It Eliminates</div>
-          <div class="bp-text">Leads go cold because you don't know what to say — and "let me think about it" kills deals that should have closed on the first call.</div>
-        </div>
+        <div class="bonus-problem"><div class="bp-label">Problem It Eliminates</div><div class="bp-text">Leads go cold because you don't know what to say — "let me think about it" kills deals that should have closed on the first call.</div></div>
         <div class="bonus-solution">
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--gold);">✓</div>
-            <span>Word-for-word first WhatsApp message for when a lead arrives — no thinking required</span>
-          </div>
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--gold);">✓</div>
-            <span>Complete Day 1, 2, 4, 7 follow-up sequence — all written and ready to copy</span>
-          </div>
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--gold);">✓</div>
-            <span>Exact script to handle "it is too expensive" using the homeowner's own energy spend numbers</span>
-          </div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--gold);">✓</div><span>Word-for-word first WhatsApp message for when a lead arrives — no thinking required</span></div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--gold);">✓</div><span>Complete Day 1, 2, 4, 7 follow-up sequence — all written and ready to copy</span></div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--gold);">✓</div><span>Exact script to handle "it is too expensive" using the homeowner's own energy spend numbers</span></div>
         </div>
       </div>
-
-      <!-- Bonus 2 -->
       <div class="bonus-card bc-2">
-        <div class="bonus-card-header">
-          <div class="bonus-card-icon">🔢</div>
-          <div>
-            <div class="bonus-card-name">Solar ROI Calculator</div>
-            <div class="bonus-value-tag">Value: ₦25,000 — Included Free</div>
-          </div>
-        </div>
+        <div class="bonus-card-header"><div class="bonus-card-icon">🔢</div><div><div class="bonus-card-name">Solar ROI Calculator</div><div class="bonus-value-tag">Value: ₦25,000 — Included Free</div></div></div>
         <div class="bonus-divider"></div>
-        <div class="bonus-problem">
-          <div class="bp-label">Problem It Eliminates</div>
-          <div class="bp-text">Homeowners say "it is too expensive" and you have no concrete comeback — because you are selling the panels, not the financial return.</div>
-        </div>
+        <div class="bonus-problem"><div class="bp-label">Problem It Eliminates</div><div class="bp-text">Homeowners say "it is too expensive" and you have no concrete comeback — because you are selling the panels, not the financial return.</div></div>
         <div class="bonus-solution">
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:var(--green);">✓</div>
-            <span>Enter their monthly fuel + NEPA spend — get their exact payback period instantly</span>
-          </div>
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:var(--green);">✓</div>
-            <span>Shows 20-year total savings — a ₦4M system saving ₦180k/month becomes an easy decision</span>
-          </div>
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:var(--green);">✓</div>
-            <span>Homeowners close themselves — when they run their own numbers, objections disappear</span>
-          </div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:var(--green);">✓</div><span>Enter their monthly fuel + NEPA spend — get their exact payback period instantly</span></div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:var(--green);">✓</div><span>Shows 20-year total savings — a ₦4M system saving ₦180k/month becomes an easy decision</span></div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:var(--green);">✓</div><span>Homeowners close themselves — when they run their own numbers, objections disappear</span></div>
         </div>
       </div>
-
-      <!-- Bonus 3 -->
       <div class="bonus-card bc-3">
-        <div class="bonus-card-header">
-          <div class="bonus-card-icon">⚡</div>
-          <div>
-            <div class="bonus-card-name">Speed Advantage Setup</div>
-            <div class="bonus-value-tag">Value: ₦30,000 — Included Free</div>
-          </div>
-        </div>
+        <div class="bonus-card-header"><div class="bonus-card-icon">⚡</div><div><div class="bonus-card-name">Speed Advantage Setup</div><div class="bonus-value-tag">Value: ₦30,000 — Included Free</div></div></div>
         <div class="bonus-divider"></div>
-        <div class="bonus-problem">
-          <div class="bp-label">Problem It Eliminates</div>
-          <div class="bp-text">You see the lead an hour later and the homeowner has already spoken to another installer — the fastest installer wins 80% of solar deals in Nigeria.</div>
-        </div>
+        <div class="bonus-problem"><div class="bp-label">Problem It Eliminates</div><div class="bp-text">You see the lead an hour later and the homeowner has already spoken to another installer — the fastest installer wins 80% of solar deals in Nigeria.</div></div>
         <div class="bonus-solution">
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.2);color:var(--blue-light);">✓</div>
-            <span>Real-time SMS fires to your phone in under 1 second the moment a lead qualifies</span>
-          </div>
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.2);color:var(--blue-light);">✓</div>
-            <span>Lead arrives with full details — name, city, budget, phone — ready to call immediately</span>
-          </div>
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.2);color:var(--blue-light);">✓</div>
-            <span>Configured before your campaign launches — zero setup required on your end</span>
-          </div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.2);color:var(--blue-light);">✓</div><span>Real-time SMS fires to your phone in under 1 second the moment a lead qualifies</span></div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.2);color:var(--blue-light);">✓</div><span>Lead arrives with full details — name, city, budget, phone — ready to call immediately</span></div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.2);color:var(--blue-light);">✓</div><span>Configured before your campaign launches — zero setup required on your end</span></div>
         </div>
       </div>
-
-      <!-- Bonus 4 -->
       <div class="bonus-card bc-4">
-        <div class="bonus-card-header">
-          <div class="bonus-card-icon">🔒</div>
-          <div>
-            <div class="bonus-card-name">Exclusive Territory Lock</div>
-            <div class="bonus-value-tag">Priceless — Monthly Package Only</div>
-          </div>
-        </div>
+        <div class="bonus-card-header"><div class="bonus-card-icon">🔒</div><div><div class="bonus-card-name">Exclusive Territory Lock</div><div class="bonus-value-tag">Priceless — Monthly Package Only</div></div></div>
         <div class="bonus-divider"></div>
-        <div class="bonus-problem">
-          <div class="bp-label">Problem It Eliminates</div>
-          <div class="bp-text">Most agencies send the same lead to multiple installers — you compete for your own lead and your margin gets squeezed by comparison shopping.</div>
-        </div>
+        <div class="bonus-problem"><div class="bp-label">Problem It Eliminates</div><div class="bp-text">Most agencies send the same lead to multiple installers — you compete for your own lead and your margin gets squeezed by comparison shopping.</div></div>
         <div class="bonus-solution">
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);color:#C084FC;">✓</div>
-            <span>While you are active we do not take another installer in your city — not one</span>
-          </div>
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);color:#C084FC;">✓</div>
-            <span>Every homeowner generated in your area belongs to you exclusively — no shared leads</span>
-          </div>
-          <div class="bs-item">
-            <div class="bs-check" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);color:#C084FC;">✓</div>
-            <span>First installer in your city to join locks the territory — once taken, it is yours alone</span>
-          </div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);color:#C084FC;">✓</div><span>While you are active we do not take another installer in your city — not one</span></div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);color:#C084FC;">✓</div><span>Every homeowner generated in your area belongs to you exclusively — no shared leads</span></div>
+          <div class="bs-item"><div class="bs-check" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);color:#C084FC;">✓</div><span>First installer in your city to join locks the territory — once taken, it is yours alone</span></div>
         </div>
       </div>
-
-      <!-- Bonus 5 — SMS Notification -->
       <div class="bonus-card bc-5" style="grid-column: 1 / -1;">
-        <div class="bonus-card-header">
-          <div class="bonus-card-icon">📱</div>
-          <div>
-            <div class="bonus-card-name">Instant Lead SMS Notification System</div>
-            <div class="bonus-value-tag">Included in All Packages — The Speed Weapon</div>
-          </div>
-        </div>
+        <div class="bonus-card-header"><div class="bonus-card-icon">📱</div><div><div class="bonus-card-name">Instant Lead SMS Notification System</div><div class="bonus-value-tag">Included in All Packages — The Speed Weapon</div></div></div>
         <div class="bonus-divider"></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-          <div class="bonus-problem" style="margin:0;">
-            <div class="bp-label">Problem It Eliminates</div>
-            <div class="bp-text">A qualified homeowner fills the form — then waits. No one calls. They move on to the next installer they found. You lost a ₦2M deal because of a 2-hour delay.</div>
-          </div>
+          <div class="bonus-problem" style="margin:0;"><div class="bp-label">Problem It Eliminates</div><div class="bp-text">A qualified homeowner fills the form — then waits. No one calls. They move on to the next installer they found. You lost a ₦2M deal because of a 2-hour delay.</div></div>
           <div class="bonus-solution">
-            <div class="bs-item">
-              <div class="bs-check" style="background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2);color:#F9A8D4;">✓</div>
-              <span>The moment a lead is marked qualified, an automated SMS fires to the homeowner — setting the stage before your call</span>
-            </div>
-            <div class="bs-item">
-              <div class="bs-check" style="background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2);color:#F9A8D4;">✓</div>
-              <span>SMS positions you as a certified professional installer — before you say a single word</span>
-            </div>
-            <div class="bs-item">
-              <div class="bs-check" style="background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2);color:#F9A8D4;">✓</div>
-              <span>When you call within 60 seconds of their form submission, you are the only installer they remember — and 80% of deals go to whoever calls first</span>
-            </div>
+            <div class="bs-item"><div class="bs-check" style="background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2);color:#F9A8D4;">✓</div><span>The moment a lead qualifies, an automated SMS fires to the homeowner — setting the stage before your call</span></div>
+            <div class="bs-item"><div class="bs-check" style="background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2);color:#F9A8D4;">✓</div><span>SMS positions you as a certified professional installer — before you say a single word</span></div>
+            <div class="bs-item"><div class="bs-check" style="background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2);color:#F9A8D4;">✓</div><span>When you call within 60 seconds of their form submission, you are the only installer they remember</span></div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -2640,46 +1443,25 @@ footer a:hover { color: var(--gold); }
 <div class="section-divider"></div>
 
 
-<!-- ═══════════════════════════════════════
-     GUARANTEE
-     ═══════════════════════════════════════ -->
+<!-- GUARANTEE -->
 <section class="guarantee-section" id="guarantee">
   <div class="container">
     <div class="section-eyebrow">Our Promise</div>
     <h2 class="section-title">What Our Guarantee <span>Looks Like in Practice</span></h2>
     <p class="section-sub">Any agency can promise results. Here is what we actually did when we fell short.</p>
-
     <div class="guarantee-story-card">
-      <div class="guarantee-eyebrow">
-        <span class="gey-dot"></span>
-        A Real Story — Not a Marketing Line
-      </div>
+      <div class="guarantee-eyebrow"><span class="gey-dot"></span>A Real Story — Not a Marketing Line</div>
       <h3>We Missed Our Timeline.<br>Here Is What We Did Next.</h3>
-      <p>
-        Earlier this year we took on a client and missed our lead delivery timeline. We did not send a
-        generic apology or offer a partial refund. We called him directly, told him the truth, and kept
-        running his campaign — delivering leads at no extra cost — until we hit every number we had originally promised.
-      </p>
-      <p>
-        Four days later, we delivered the full volume. He was not just satisfied —
-        he reached back out and is currently working with us on his next project.
-      </p>
+      <p>Earlier this year we took on a client and missed our lead delivery timeline. We did not send a generic apology or offer a partial refund. We called him directly, told him the truth, and kept running his campaign — delivering leads at no extra cost — until we hit every number we had originally promised.</p>
+      <p>Four days later, we delivered the full volume. He was not just satisfied — he reached back out and is currently working with us on his next project.</p>
       <p><em>That is not a marketing story. That is how we handle the times when things do not go perfectly. And it is why our partners stay.</em></p>
-      <div class="guarantee-outcome">
-        <div class="go-icon">🔄</div>
-        <div class="go-text">The client who experienced our guarantee first-hand came back for a second project. Accountability builds the kind of trust no ad campaign can manufacture.</div>
-      </div>
+      <div class="guarantee-outcome"><div class="go-icon">🔄</div><div class="go-text">The client who experienced our guarantee first-hand came back for a second project. Accountability builds the kind of trust no ad campaign can manufacture.</div></div>
     </div>
-
     <div class="guarantee-box">
       <div class="guarantee-shield">🛡️</div>
       <div class="guarantee-box-text">
-        <h4>The Volume & Quality Guarantee — On Every Package</h4>
-        <p>
-          If we miss your agreed lead volume within the service period,
-          <strong>we do not stop</strong>. We keep running your campaign and delivering leads at no extra cost until we hit the number we promised. And if any lead we deliver does not meet our qualification standard — property owner, confirmed budget, 90-day install timeline — that lead does not count toward your target. We replace it. No arguments, no back and forth. No excuses. No refunds needed.
-          <strong>because we do not stop until it is done.</strong>
-        </p>
+        <h4>The Volume &amp; Quality Guarantee — On Every Package</h4>
+        <p>If we miss your agreed lead volume within the service period, <strong>we do not stop</strong>. We keep running your campaign and delivering leads at no extra cost until we hit the number we promised. And if any lead we deliver does not meet our qualification standard — property owner, confirmed budget, 90-day install timeline — that lead does not count toward your target. We replace it. No arguments, no back and forth. No excuses. No refunds needed. <strong>because we do not stop until it is done.</strong></p>
       </div>
     </div>
   </div>
@@ -2688,21 +1470,13 @@ footer a:hover { color: var(--gold); }
 <div class="section-divider"></div>
 
 
-<!-- ═══════════════════════════════════════
-     OFFER PACKAGES
-     ═══════════════════════════════════════ -->
+<!-- OFFER -->
 <section class="offer-section" id="offer">
   <div class="container">
     <div class="section-eyebrow">DFY Partner Program</div>
     <h2 class="section-title">Choose Your <span>Partner Package</span></h2>
-    <p class="section-sub">
-      Three ways to work with us. One to prove it works. One to scale it. One to dominate multiple cities.
-      All come with the Volume Guarantee.
-    </p>
-
+    <p class="section-sub">Three ways to work with us. One to prove it works. One to scale it. One to dominate multiple cities. All come with the Volume &amp; Quality Guarantee.</p>
     <div class="offer-grid">
-
-      <!-- TRIAL -->
       <div class="offer-card oc-trial">
         <div class="offer-head">
           <span class="offer-tag">Start Here — Risk Free</span>
@@ -2715,25 +1489,17 @@ footer a:hover { color: var(--gold); }
           <div class="offer-features-label">What You Get</div>
           <ul class="offer-features">
             <li><span class="of-check">✓</span><span><strong>10+ pre-qualified homeowners</strong> delivered to your WhatsApp in 7 days</span></li>
-            <li><span class="of-check">✓</span><span>Done-for-you Facebook campaign — built and launched for you</span></li>
+            <li><span class="of-check">✓</span><span>Done-for-you Facebook campaign — built and launched for you with Tubalcain business manager and page</span></li>
             <li><span class="of-check">✓</span><span>13-question qualification system — every lead confirmed</span></li>
             <li><span class="of-check">✓</span><span>Real-time SMS delivery — under 1 second per lead</span></li>
             <li><span class="of-check">✓</span><span>Authority Close Kit Vol. 1 &amp; 2</span></li>
             <li><span class="of-check">✓</span><span>Solar ROI Calculator</span></li>
             <li><span class="of-check">✓</span><span>Speed Advantage SMS Setup</span></li>
           </ul>
-          <div class="offer-guarantee-strip">
-            <div class="ogs-icon">🛡️</div>
-            <div class="ogs-text"><strong>Volume & Quality Guarantee:</strong> Miss the target? We keep delivering free until we hit it.</div>
-          </div>
-          <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20I%20want%20to%20start%20the%20Proof%20of%20Concept%20package%20-%20₦50,000%20trial" class="offer-cta" target="_blank" rel="noopener">
-            Start My Trial Now
-            <span class="oc-arrow">→</span>
-          </a>
+          <div class="offer-guarantee-strip"><div class="ogs-icon">🛡️</div><div class="ogs-text"><strong>Volume &amp; Quality Guarantee:</strong> Miss the target? We keep delivering free until we hit it.</div></div>
+          <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20I%20want%20to%20start%20the%20Proof%20of%20Concept%20package%20-%20%E2%82%A650%2C000%20trial" class="offer-cta" target="_blank" rel="noopener">Start My Trial Now <span class="oc-arrow">→</span></a>
         </div>
       </div>
-
-      <!-- PIPELINE PROTOCOL -->
       <div class="offer-card oc-proto">
         <div class="offer-popular">Most Popular — Best Value</div>
         <div class="offer-head">
@@ -2742,14 +1508,8 @@ footer a:hover { color: var(--gold); }
           <div class="offer-tagline">The complete done-for-you system running every week. Exclusive territory. Guaranteed volume.</div>
           <div class="offer-price-main">₦70,000</div>
           <div class="offer-price-note">Per week &nbsp;·&nbsp; Prepaid monthly (4 weeks)</div>
-          <div class="offer-price-total">
-            Total to start: <strong>₦330,000</strong><br>
-            <span style="font-size:11px;color:var(--muted);">(₦280k for 4 weeks + ₦50k setup fee)</span>
-          </div>
-          <div class="upgrade-note">
-            🎯 Upgrading from the trial within 48 hours?
-            ₦30k of your trial fee is credited — you only pay <strong>₦20k setup</strong>. Total: ₦300,000.
-          </div>
+          <div class="offer-price-total">Total to start: <strong>₦330,000</strong><br><span style="font-size:11px;color:var(--muted);">(₦280k for 4 weeks + ₦50k setup fee)</span></div>
+          <div class="upgrade-note">🎯 Upgrading from the trial within 48 hours? ₦30k of your trial fee is credited — you only pay <strong>₦20k setup</strong>. Total: ₦300,000.</div>
         </div>
         <div class="offer-body">
           <div class="offer-features-label">Everything in Trial, Plus</div>
@@ -2760,18 +1520,10 @@ footer a:hover { color: var(--gold); }
             <li><span class="of-check">✓</span><span><strong>Exclusive Territory Lock</strong> — your city, yours alone</span></li>
             <li><span class="of-check">✓</span><span>All bonuses included</span></li>
           </ul>
-          <div class="offer-guarantee-strip">
-            <div class="ogs-icon">🛡️</div>
-            <div class="ogs-text"><strong>Volume & Quality Guarantee:</strong> Miss your 50-qualified lead target? We keep going free until done.</div>
-          </div>
-          <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20I%20want%20the%20Pipeline%20Protocol%20monthly%20package" class="offer-cta" target="_blank" rel="noopener">
-            Secure My Territory Now
-            <span class="oc-arrow">→</span>
-          </a>
+          <div class="offer-guarantee-strip"><div class="ogs-icon">🛡️</div><div class="ogs-text"><strong>Volume &amp; Quality Guarantee:</strong> Miss your 50-qualified lead target? We keep going free until done.</div></div>
+          <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20I%20want%20the%20Pipeline%20Protocol%20monthly%20package" class="offer-cta" target="_blank" rel="noopener">Secure My Territory Now <span class="oc-arrow">→</span></a>
         </div>
       </div>
-
-      <!-- ELITE MULTI-CITY -->
       <div class="offer-card oc-elite">
         <div class="offer-head">
           <span class="offer-tag">Maximum Dominance</span>
@@ -2779,10 +1531,7 @@ footer a:hover { color: var(--gold); }
           <div class="offer-tagline">Lock up to 4 cities simultaneously. For installers ready to scale beyond a single territory.</div>
           <div class="offer-price-main">₦990,000</div>
           <div class="offer-price-note">Per month &nbsp;·&nbsp; Up to 4 cities</div>
-          <div class="offer-price-total">
-            Starting from <strong>₦990,000/month</strong><br>
-            <span style="font-size:11px;color:var(--muted);">Custom quote based on cities selected</span>
-          </div>
+          <div class="offer-price-total">Starting from <strong>₦990,000/month</strong><br><span style="font-size:11px;color:var(--muted);">Custom quote based on cities selected</span></div>
         </div>
         <div class="offer-body">
           <div class="offer-features-label">Everything in Pipeline Protocol, Plus</div>
@@ -2794,17 +1543,10 @@ footer a:hover { color: var(--gold); }
             <li><span class="of-check">✓</span><span>Priority support &amp; VIP onboarding</span></li>
             <li><span class="of-check">✓</span><span>No competitor can enter any of your 4 territories</span></li>
           </ul>
-          <div class="offer-guarantee-strip">
-            <div class="ogs-icon">🛡️</div>
-            <div class="ogs-text"><strong>Volume & Quality Guarantee:</strong> Applied across all 4 territories — we deliver or we work free.</div>
-          </div>
-          <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20I%20want%20to%20discuss%20the%20Elite%20Multi-City%20Programme" class="offer-cta" target="_blank" rel="noopener">
-            Discuss My Cities
-            <span class="oc-arrow">→</span>
-          </a>
+          <div class="offer-guarantee-strip"><div class="ogs-icon">🛡️</div><div class="ogs-text"><strong>Volume &amp; Quality Guarantee:</strong> Applied across all 4 territories — we deliver or we work free.</div></div>
+          <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20I%20want%20to%20discuss%20the%20Elite%20Multi-City%20Programme" class="offer-cta" target="_blank" rel="noopener">Discuss My Cities <span class="oc-arrow">→</span></a>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -2812,102 +1554,97 @@ footer a:hover { color: var(--gold); }
 <div class="section-divider"></div>
 
 
-<!-- ═══════════════════════════════════════
-     FINAL CLOSE
-     ═══════════════════════════════════════ -->
+<!-- FINAL CLOSE -->
 <section class="close-section" id="decide">
   <div class="container">
-    <h2>
-      You've Seen the System.<br>
-      You've Seen the <span class="blue">Proof.</span><br>
-      <span class="gold">The Decision Is Yours.</span>
-    </h2>
-
-    <p>
-      You qualified for this page because your business matched the profile of installers
-      who get real ROI from what we do. You have watched how the system works. You have seen the numbers.
-    </p>
-
-    <p>
-      <strong>Our partners do not run ads. They do not check dashboards. They do not chase leads.</strong>
-      They receive pre-qualified homeowners directly on their WhatsApp and show up to close deals.
-    </p>
-
-    <p>
-      We only open partner slots for one installers per city so leads do not overlap.
-      If your city still has an open slot — you can be receiving qualified homeowners within 48 hours.
-    </p>
-
+    <h2>You've Seen the System.<br>You've Seen the <span class="blue">Proof.</span><br><span class="gold">The Decision Is Yours.</span></h2>
+    <p>You qualified for this page because your business matched the profile of installers who get real ROI from what we do. You have watched how the system works. You have seen the numbers.</p>
+    <p><strong>Our partners do not run ads. They do not check dashboards. They do not chase leads.</strong> They receive pre-qualified homeowners directly on their WhatsApp and show up to close deals.</p>
+    <p>We only open partner slots for one installer per city so leads do not overlap. If your city still has an open slot — you can be receiving qualified homeowners within 48 hours.</p>
     <div class="close-cta-row">
-      <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20I%20want%20to%20apply%20for%20a%20DFY%20partner%20slot" class="btn btn-gold" target="_blank" rel="noopener">
-        Apply For Your Partner Slot
-        <span class="arrow">→</span>
-      </a>
-      <a href="#offer" class="btn btn-outline">
-        Review All Packages
-      </a>
+      <a href="https://wa.me/2348029234994?text=Hi%20Mystery%2C%20I%20want%20to%20apply%20for%20a%20DFY%20partner%20slot" class="btn btn-gold" target="_blank" rel="noopener">Apply For Your Partner Slot <span class="arrow">→</span></a>
+      <a href="#offer" class="btn btn-outline">Review All Packages</a>
     </div>
-
-    <div class="close-scarcity">
-      <span class="cs-dot"></span>
-      4 installer slots currently open across Nigeria
-    </div>
+    <div class="close-scarcity"><span class="cs-dot"></span>4 installer slots currently open across Nigeria</div>
   </div>
 </section>
 
 
-<!-- ═══════════════════════════════════════
-     FOOTER
-     ═══════════════════════════════════════ -->
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-logo">Tubalcain <span>Agency</span></div>
-    <p>
-      Nigeria's Solar Lead Generation Specialists &nbsp;·&nbsp;
-      <a href="https://wa.me/2348029234994">+234 802 923 4994</a> &nbsp;·&nbsp;
-      Warri, Delta State
-    </p>
-    <p style="margin-top:10px;">
-      <a href="https://tubalcainmy.github.io/tubalcain-advertising/">Main Website</a>
-      &nbsp;&nbsp;·&nbsp;&nbsp;
-      <a href="#top">Back to Top ↑</a>
-    </p>
+    <p>Nigeria's Solar Lead Generation Specialists &nbsp;·&nbsp; <a href="https://wa.me/2348029234994">+234 802 923 4994</a> &nbsp;·&nbsp; Warri, Delta State</p>
+    <p style="margin-top:10px;"><a href="https://tubalcainmy.github.io/tubalcain-advertising/">Main Website</a> &nbsp;&nbsp;·&nbsp;&nbsp; <a href="#top">Back to Top ↑</a></p>
     <p style="margin-top:16px;font-size:12px;color:#1e2d42;">Tubalcain Agency © 2026 &nbsp;·&nbsp; DFY Partner Programme</p>
   </div>
 </footer>
 
+
 <script>
-  // Progress bar
-  const bar = document.getElementById('progressBar');
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const total    = document.body.scrollHeight - window.innerHeight;
-    bar.style.width = Math.min((scrolled / total) * 100, 100) + '%';
-  }, { passive: true });
+/* ═══════════════════════════════════════════════════
+   FIX: YouTube Facade — loads YouTube only on click
+   Saves ~1.2MB and removes 6-11s LCP delay
+   ═══════════════════════════════════════════════════ */
+function loadYT(el) {
+  if (el.classList.contains('loading')) return;
+  el.classList.add('loading');
 
-  // Track WhatsApp CTA clicks
-  document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
-    a.addEventListener('click', () => {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'whatsapp_click', { event_category: 'CTA', event_label: a.textContent.trim() });
-      }
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'Contact');
-      }
-    });
-  });
+  const videoId = el.dataset.videoid;
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+  iframe.allowFullscreen = true;
+  iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
 
-  // Track download clicks
-  document.querySelectorAll('.download-btn').forEach(a => {
-    a.addEventListener('click', () => {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'download_click', { event_category: 'Download', event_label: a.textContent.trim() });
-      }
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'ViewContent', { content_name: a.textContent.trim() });
-      }
-    });
+  // For edu video (aspect-ratio wrapper rather than absolute parent)
+  const isEdu = el.closest('.edu-video-wrap');
+  if (isEdu) {
+    iframe.style.cssText = 'display:block;width:100%;aspect-ratio:16/9;border:none;';
+  }
+
+  // Replace facade with iframe
+  el.parentNode.replaceChild(iframe, el);
+}
+
+/* ═══════════════════════════════════════════════════
+   Progress bar
+   ═══════════════════════════════════════════════════ */
+const bar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total    = document.body.scrollHeight - window.innerHeight;
+  bar.style.width = Math.min((scrolled / total) * 100, 100) + '%';
+}, { passive: true });
+
+/* ═══════════════════════════════════════════════════
+   Track WhatsApp clicks — GA + Meta Pixel
+   ═══════════════════════════════════════════════════ */
+document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+  a.addEventListener('click', () => {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'whatsapp_click', { event_category: 'CTA', event_label: a.textContent.trim() });
+    }
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Contact');
+    }
   });
+});
+
+/* ═══════════════════════════════════════════════════
+   FIX: Track download WhatsApp clicks as downloads too
+   ═══════════════════════════════════════════════════ */
+document.querySelectorAll('.download-btn').forEach(a => {
+  a.addEventListener('click', () => {
+    const resource = a.dataset.resource || a.textContent.trim();
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'download_click', { event_category: 'Download', event_label: resource });
+    }
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', { content_name: resource });
+    }
+  });
+});
 </script>
 
 </body>
