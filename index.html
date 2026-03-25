@@ -2320,7 +2320,7 @@ document.querySelectorAll('.gate-card,.case-card,.bonus-card,.proof-card,.offer-
         <div class="qtitle">How many residential solar installations does your team complete per month?</div>
         <div class="qsub">Be honest — this helps us confirm our lead volume is the right fit for your operation.</div>
         <div class="qoptions">
-          <button class="qoption" data-q="2" data-val="1-3" data-disqualify="true" onclick="selectQ(this)">
+          <button class="qoption" data-q="2" data-val="1-3" onclick="selectQ(this)">
             <div class="qopt-radio"></div>
             <span class="qopt-text">1 – 3 installations per month</span>
           </button>
@@ -2388,7 +2388,7 @@ document.querySelectorAll('.gate-card,.case-card,.bonus-card,.proof-card,.offer-
             <div class="qopt-radio"></div>
             <span class="qopt-text">Almost — we need about a week to get our follow-up process in order</span>
           </button>
-          <button class="qoption" data-q="4" data-val="not-ready" data-disqualify="true" onclick="selectQ(this)">
+          <button class="qoption" data-q="4" data-val="not-ready" onclick="selectQ(this)">
             <div class="qopt-radio"></div>
             <span class="qopt-text">Not yet — we are not in a position to handle that volume right now</span>
           </button>
@@ -2471,7 +2471,7 @@ document.querySelectorAll('.gate-card,.case-card,.bonus-card,.proof-card,.offer-
    QUALIFIER POPUP LOGIC
    Routes: ad-spenders → WhatsApp | others → website
 ═══════════════════════════════════════════════════ */
-const WEBHOOK = 'https://hook.us2.make.com/fgwm7avh64ti6dxcmdu2rti7kq5jwy7o';
+const WEBHOOK = 'https://hook.eu1.make.com/45ltiptmoe3p0o2igyfgsqs2b7olo549';
 const WA_BASE = 'https://wa.me/2348029234994?text=';
 
 const qAnswers  = {};
@@ -2521,7 +2521,7 @@ function nextQ(from) {
     document.getElementById('qerr'+from).style.display = 'block';
     return;
   }
-  // Check if this answer disqualifies
+  // Only Q1 can disqualify — Q2, Q3, Q4 collect data only
   if (qAnswers[from].disqualify) {
     qDisqualified = true;
     showDisqualified();
