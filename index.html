@@ -391,6 +391,326 @@ body::before {
   .qresult { padding-left: 20px; padding-right: 20px; }
 }
 
+
+/* ═══════════════════════
+   LEAD NURTURE ADD-ON
+═══════════════════════ */
+.nurture-section{
+  background:var(--ink-2);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+
+.nurture-section::before{
+  content:'';position:absolute;
+  top:-80px;left:50%;transform:translateX(-50%);
+  width:700px;height:400px;
+  background:radial-gradient(ellipse,rgba(102,187,106,0.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+/* Problem bar */
+.nurture-problem-bar{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border:1px solid var(--border);
+  border-radius:6px;overflow:hidden;
+  margin:44px 0 48px;
+}
+
+.npb-item{
+  padding:22px 20px;
+  border-right:1px solid var(--border);
+  position:relative;
+}
+.npb-item:last-child{border-right:none;}
+
+.npb-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  color:#F87171;margin-bottom:8px;display:flex;align-items:center;gap:6px;
+}
+.npb-label::before{
+  content:'';width:16px;height:1px;background:#F87171;opacity:0.4;
+}
+
+.npb-scenario{
+  font-size:13px;font-weight:600;color:#888;
+  line-height:1.55;font-style:italic;
+}
+
+.npb-outcome{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:10px;
+  font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--red);
+  background:rgba(239,83,80,0.08);
+  border:1px solid rgba(239,83,80,0.15);
+  padding:3px 10px;border-radius:2px;
+}
+
+/* Main nurture card */
+.nurture-card{
+  background:var(--card);
+  border:1px solid rgba(102,187,106,0.2);
+  border-top:3px solid var(--green);
+  border-radius:6px;
+  overflow:hidden;
+  position:relative;
+}
+
+.nurture-card::before{
+  content:'';position:absolute;
+  top:0;right:0;
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(102,187,106,0.04) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+/* Head */
+.nurture-head{
+  padding:36px 36px 28px;
+  border-bottom:1px solid var(--border);
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:24px;align-items:start;
+}
+
+.nurture-eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--green);margin-bottom:12px;
+}
+.nurture-eyebrow-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);animation:blink 1.5s ease-in-out infinite;
+}
+
+.nurture-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(28px,4vw,42px);font-weight:900;
+  letter-spacing:0.02em;text-transform:uppercase;
+  color:var(--white);line-height:1;margin-bottom:8px;
+}
+.nurture-name em{color:var(--green);font-style:normal;}
+
+.nurture-tagline{
+  font-size:15px;color:var(--grey);
+  line-height:1.7;max-width:520px;
+}
+
+/* Pricing panel */
+.nurture-price-panel{
+  background:rgba(102,187,106,0.05);
+  border:1px solid rgba(102,187,106,0.15);
+  border-radius:6px;padding:24px;
+  text-align:center;min-width:200px;flex-shrink:0;
+}
+
+.nurture-price-tag{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--green);margin-bottom:10px;
+}
+
+.nurture-price{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:48px;font-weight:900;
+  color:var(--green);line-height:1;
+  margin-bottom:4px;letter-spacing:0.02em;
+}
+
+.nurture-price-note{
+  font-size:11px;color:var(--grey-2);
+  font-weight:600;line-height:1.5;
+}
+
+.nurture-total{
+  margin-top:12px;padding:10px 12px;
+  background:rgba(102,187,106,0.08);
+  border:1px solid rgba(102,187,106,0.15);
+  border-radius:4px;
+  font-size:12px;color:#888;line-height:1.5;
+}
+.nurture-total strong{color:var(--green);}
+
+/* 2+1 promo */
+.nurture-promo{
+  margin-top:10px;padding:12px;
+  background:rgba(255,179,0,0.06);
+  border:1px solid rgba(255,179,0,0.18);
+  border-radius:4px;
+}
+.nurture-promo-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:5px;
+}
+.nurture-promo p{font-size:11px;color:#666;line-height:1.6;margin:0;}
+.nurture-promo p strong{color:var(--amber);}
+
+/* Body */
+.nurture-body{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+}
+
+.nurture-col{
+  padding:28px 36px;
+  border-right:1px solid var(--border);
+}
+.nurture-col:last-child{border-right:none;}
+
+.nurture-col-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px;
+}
+
+/* SMS sequence timeline */
+.sms-timeline{
+  display:flex;flex-direction:column;gap:0;
+  position:relative;
+}
+
+.sms-timeline::before{
+  content:'';position:absolute;
+  left:14px;top:14px;bottom:14px;
+  width:1px;background:var(--border);
+}
+
+.sms-week{
+  display:flex;gap:14px;align-items:flex-start;
+  position:relative;z-index:1;
+  padding-bottom:16px;
+}
+.sms-week:last-child{padding-bottom:0;}
+
+.sms-week-dot{
+  width:28px;height:28px;border-radius:50%;
+  border:2px solid var(--border-2);
+  background:var(--card);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;
+  color:var(--grey-2);flex-shrink:0;
+}
+
+.sms-week-dot.active{
+  border-color:var(--green);
+  background:rgba(102,187,106,0.1);
+  color:var(--green);
+}
+
+.sms-week-content{flex:1;padding-top:4px;}
+
+.sms-week-title{
+  font-size:12px;font-weight:700;
+  color:var(--white);margin-bottom:3px;
+}
+
+.sms-week-desc{
+  font-size:11px;color:var(--grey-2);
+  line-height:1.55;
+}
+
+.sms-count-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--green);
+  background:rgba(102,187,106,0.08);
+  border:1px solid rgba(102,187,106,0.15);
+  padding:2px 8px;border-radius:2px;
+  margin-top:5px;
+}
+
+/* What's included list */
+.nurture-includes{
+  display:flex;flex-direction:column;gap:10px;
+}
+
+.ni-item{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:12px;color:#888;line-height:1.55;
+}
+
+.ni-check{
+  width:16px;height:16px;border-radius:50%;
+  background:rgba(102,187,106,0.1);
+  border:1px solid rgba(102,187,106,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;color:var(--green);
+  flex-shrink:0;margin-top:1px;
+}
+
+.ni-item strong{color:#C0C0B8;}
+
+/* Stats strip */
+.nurture-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;
+  border-top:1px solid var(--border);
+}
+
+.ns-item{
+  padding:20px;text-align:center;
+  border-right:1px solid var(--border);
+}
+.ns-item:last-child{border-right:none;}
+
+.ns-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:32px;font-weight:900;
+  color:var(--green);line-height:1;margin-bottom:4px;
+}
+
+.ns-label{font-size:10px;color:var(--grey-2);font-weight:600;line-height:1.4;}
+
+/* CTA strip */
+.nurture-cta-strip{
+  padding:24px 36px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;
+  justify-content:space-between;gap:20px;flex-wrap:wrap;
+  background:rgba(102,187,106,0.03);
+}
+
+.nurture-cta-text{
+  font-size:14px;color:var(--grey-2);
+  line-height:1.6;flex:1;
+}
+.nurture-cta-text strong{color:#888;}
+
+.nurture-cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green);color:#0A0A0A;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:14px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;
+  padding:14px 24px;border-radius:4px;text-decoration:none;
+  transition:all 0.22s;white-space:nowrap;flex-shrink:0;
+}
+.nurture-cta-btn:hover{background:#81C784;transform:translateY(-2px);}
+
+@media(max-width:900px){
+  .nurture-head{grid-template-columns:1fr;}
+  .nurture-body{grid-template-columns:1fr;}
+  .nurture-col{border-right:none;border-bottom:1px solid var(--border);}
+  .nurture-col:last-child{border-bottom:none;}
+  .nurture-stats{grid-template-columns:1fr 1fr;}
+  .ns-item:nth-child(2){border-right:none;}
+  .ns-item:nth-child(3){border-top:1px solid var(--border);}
+  .ns-item:nth-child(4){border-top:1px solid var(--border);border-right:none;}
+  .nurture-cta-strip{flex-direction:column;align-items:flex-start;}
+  .nurture-cta-btn{width:100%;justify-content:center;}
+  .nurture-problem-bar{grid-template-columns:1fr;}
+  .npb-item{border-right:none;border-bottom:1px solid var(--border);}
+  .npb-item:last-child{border-bottom:none;}
+}
 /* ═══════════════════════
    PROGRESS BAR
 ═══════════════════════ */
@@ -2086,7 +2406,7 @@ footer a:hover{color:var(--amber);}
         <div class="offer-body">
           <div class="offer-features-label">What You Get</div>
           <ul class="offer-features">
-            <li><span class="of-check">✓</span><span><strong>10 to 15 pre-qualified homeowners</strong> to your WhatsApp in 7 days</span></li>
+            <li><span class="of-check">✓</span><span><strong>10+ pre-qualified homeowners</strong> to your WhatsApp in 7 days</span></li>
             <li><span class="of-check">✓</span><span>Done-for-you Facebook campaign — built and launched for you</span></li>
             <li><span class="of-check">✓</span><span>13-question qualification system — every lead confirmed</span></li>
             <li><span class="of-check">✓</span><span>Real-time SMS delivery — under 1 second per lead</span></li>
@@ -2112,7 +2432,7 @@ footer a:hover{color:var(--amber);}
         <div class="offer-body">
           <div class="offer-features-label">Everything in Trial, Plus</div>
           <ul class="offer-features">
-            <li><span class="of-check">✓</span><span><strong>50 to 60 pre-qualified leads per month</strong> — consistent weekly flow</span></li>
+            <li><span class="of-check">✓</span><span><strong>50 pre-qualified leads per month</strong> — consistent weekly flow</span></li>
             <li><span class="of-check">✓</span><span>Dedicated weekly Facebook campaigns — we manage everything</span></li>
             <li><span class="of-check">✓</span><span>Weekly performance reports — leads, cost per lead, ROI</span></li>
             <li><span class="of-check">✓</span><span><strong>Exclusive Territory Lock</strong> — your city, yours alone</span></li>
@@ -2155,6 +2475,196 @@ footer a:hover{color:var(--amber);}
     </div>
   </div>
 </section>
+
+
+<div class="section-div"></div>
+
+
+<!-- ══════════════════════════════
+     90-DAY LEAD NURTURE ADD-ON
+══════════════════════════════ -->
+<section class="nurture-section" id="nurture">
+  <div class="container">
+    <div class="label">Add-On Service</div>
+    <h2 class="section-title">The Problem No One Talks About.<br><em>Leads That Never Convert.</em></h2>
+    <p class="section-sub">Getting pre-qualified homeowners to your WhatsApp is step one. What happens next determines whether they become ₦2M jobs or silent numbers. Most installers lose deals not because of bad leads — but because of what happens after the lead arrives.</p>
+
+    <!-- 3 real scenarios -->
+    <div class="nurture-problem-bar">
+
+      <div class="npb-item">
+        <div class="npb-label">Scenario 1</div>
+        <div class="npb-scenario">"A qualified homeowner filled the form on Monday. By Friday your team finally messaged them. They had already booked a site visit with another installer."</div>
+        <div class="npb-outcome">₦2M job — lost to speed</div>
+      </div>
+
+      <div class="npb-item">
+        <div class="npb-label">Scenario 2</div>
+        <div class="npb-scenario">"You called within the hour. They said they were not ready yet. Your team moved on. Three weeks later that homeowner installed with a competitor who kept following up."</div>
+        <div class="npb-outcome">₦1.8M job — lost to silence</div>
+      </div>
+
+      <div class="npb-item">
+        <div class="npb-label">Scenario 3</div>
+        <div class="npb-scenario">"The lead said 'let me think about it.' Your team had no follow-up sequence, no value-add message, no reason to call back. The deal died without anyone knowing it was still alive."</div>
+        <div class="npb-outcome">₦2.4M job — lost to no system</div>
+      </div>
+
+    </div>
+
+    <!-- Main add-on card -->
+    <div class="nurture-card">
+
+      <!-- Head -->
+      <div class="nurture-head">
+        <div>
+          <div class="nurture-eyebrow"><span class="nurture-eyebrow-dot"></span>Optional Add-On — Available With Any Package</div>
+          <div class="nurture-name">90-Day <em>Lead Nurture</em><br>System</div>
+          <p class="nurture-tagline">We follow up on every lead we deliver to you for 90 days — through a structured SMS sequence designed to re-engage, provide value, and move homeowners from "not yet" to "let's book a site visit." Your team focuses on closing. We handle the follow-up.</p>
+        </div>
+
+        <div class="nurture-price-panel">
+          <div class="nurture-price-tag">Full 90-Day System</div>
+          <div class="nurture-price">₦100k</div>
+          <div class="nurture-price-note">per 50 leads &nbsp;·&nbsp; 90 days<br>billed as 2 months upfront</div>
+          <div class="nurture-total">
+            Covers up to <strong>50 leads</strong><br>
+            <strong>36 SMS touches</strong> per lead<br>
+            over <strong>12 weeks</strong>
+          </div>
+          <div class="nurture-promo">
+            <div class="nurture-promo-label">🎯 Best Value</div>
+            <p>Add to any <strong>2-month package</strong> and we run the full 90-day nurture on all leads from both months — at <strong>no extra charge</strong> on Month 3.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Body: timeline + includes -->
+      <div class="nurture-body">
+
+        <!-- SMS sequence timeline -->
+        <div class="nurture-col">
+          <div class="nurture-col-label">The 12-Week SMS Sequence</div>
+          <div class="sms-timeline">
+
+            <div class="sms-week">
+              <div class="sms-week-dot active">W1</div>
+              <div class="sms-week-content">
+                <div class="sms-week-title">Week 1 — Warm Welcome</div>
+                <div class="sms-week-desc">3 SMS. Positions the installer as a certified expert. Sets expectations. Builds immediate trust before the first call.</div>
+                <div class="sms-count-badge">3 SMS this week</div>
+              </div>
+            </div>
+
+            <div class="sms-week">
+              <div class="sms-week-dot active">W2</div>
+              <div class="sms-week-content">
+                <div class="sms-week-title">Weeks 2–4 — Education &amp; Value</div>
+                <div class="sms-week-desc">3 SMS per week. Power cost comparisons, solar ROI facts, homeowner success stories. Keeps the installer top of mind while building the homeowner's case for solar.</div>
+                <div class="sms-count-badge">9 SMS across 3 weeks</div>
+              </div>
+            </div>
+
+            <div class="sms-week">
+              <div class="sms-week-dot">W5</div>
+              <div class="sms-week-content">
+                <div class="sms-week-title">Weeks 5–8 — Urgency &amp; Social Proof</div>
+                <div class="sms-week-desc">3 SMS per week. Result stories from other homeowners in the same city. Price increase warnings. Seasonal NEPA pattern data. Moves "thinking about it" to "I need to decide."</div>
+                <div class="sms-count-badge">12 SMS across 4 weeks</div>
+              </div>
+            </div>
+
+            <div class="sms-week">
+              <div class="sms-week-dot">W9</div>
+              <div class="sms-week-content">
+                <div class="sms-week-title">Weeks 9–12 — Final Close Window</div>
+                <div class="sms-week-desc">3 SMS per week. Direct re-engagement. Limited availability messaging. Last-chance site visit offer. Designed to convert every remaining warm lead before the 90-day window closes.</div>
+                <div class="sms-count-badge">12 SMS across 4 weeks</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- What's included -->
+        <div class="nurture-col">
+          <div class="nurture-col-label">What Is Included</div>
+          <div class="nurture-includes">
+
+            <div class="ni-item">
+              <div class="ni-check">✓</div>
+              <span><strong>36 SMS per lead over 90 days</strong> — 3 per week, every week, for the full 12-week window</span>
+            </div>
+
+            <div class="ni-item">
+              <div class="ni-check">✓</div>
+              <span><strong>Custom SMS copy written for your city</strong> — Abuja, Lagos, Port Harcourt homeowners respond to different triggers. We localise every message.</span>
+            </div>
+
+            <div class="ni-item">
+              <div class="ni-check">✓</div>
+              <span><strong>Fully automated delivery</strong> — messages fire on schedule without you or your team doing anything. Set and forget.</span>
+            </div>
+
+            <div class="ni-item">
+              <div class="ni-check">✓</div>
+              <span><strong>Covers up to 50 leads</strong> — all leads generated during your active package period are eligible</span>
+            </div>
+
+            <div class="ni-item">
+              <div class="ni-check">✓</div>
+              <span><strong>Re-engagement alerts</strong> — if a lead replies to any SMS, you receive an instant notification so your team can follow up immediately while they are warm</span>
+            </div>
+
+            <div class="ni-item">
+              <div class="ni-check">✓</div>
+              <span><strong>Monthly SMS delivery report</strong> — open rates, reply rates, and which leads are showing engagement signals worth pursuing</span>
+            </div>
+
+            <div class="ni-item">
+              <div class="ni-check">✓</div>
+              <span><strong>Works alongside your existing follow-up</strong> — the SMS sequence runs in the background while your team handles calls and site visits</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Stats strip -->
+      <div class="nurture-stats">
+        <div class="ns-item">
+          <div class="ns-num">36</div>
+          <div class="ns-label">SMS touches<br>per lead</div>
+        </div>
+        <div class="ns-item">
+          <div class="ns-num">12</div>
+          <div class="ns-label">weeks of<br>follow-up</div>
+        </div>
+        <div class="ns-item">
+          <div class="ns-num">50</div>
+          <div class="ns-label">leads covered<br>per period</div>
+        </div>
+        <div class="ns-item">
+          <div class="ns-num">3×</div>
+          <div class="ns-label">more conversions<br>vs no follow-up</div>
+        </div>
+      </div>
+
+      <!-- CTA strip -->
+      <div class="nurture-cta-strip">
+        <div class="nurture-cta-text">
+          <strong>Add the 90-Day Nurture System to any package.</strong> ₦100,000 for 90 days of automated SMS follow-up on up to 50 leads. Add to 2 months and Month 3 follow-up is free.
+        </div>
+        <a href="#" class="nurture-cta-btn" onclick="openQualifier('nurture');return false;">
+          Add This to My Package <span class="btn-arrow">→</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
 <div class="section-div"></div>
 
@@ -2440,10 +2950,10 @@ document.querySelectorAll('.gate-card,.case-card,.bonus-card,.proof-card,.offer-
       <div class="qresult-title">You Qualify.</div>
       <div class="qresult-sub">
         <strong>Your city slot is being checked.</strong><br>
-        Message Tubalcain Agency directly on WhatsApp — we will confirm availability and get your campaign live within 48 hours.
+        Message Mystery directly on WhatsApp — we will confirm availability and get your campaign live within 48 hours.
       </div>
       <a id="qWhatsAppLink" href="#" class="qresult-btn primary" target="_blank" rel="noopener">
-        Message Tubalcain Agency on WhatsApp →
+        Message Mystery on WhatsApp →
       </a>
     </div>
 
@@ -2452,7 +2962,7 @@ document.querySelectorAll('.gate-card,.case-card,.bonus-card,.proof-card,.offer-
       <div class="qresult-icon">📘</div>
       <div class="qresult-title">Not the Right Fit<br>— Yet.</div>
       <div class="qresult-sub">
-        The Pipeline Protocol is designed for businesses already running ads with an established team. If you are still building that foundation, apply for Down-For-You Service on our main website will help you get started on Facebook ad's with confidence and a constant inflow of pre-qualified leads.
+        The Pipeline Protocol is designed for businesses already running ads with an established team. If you are still building that foundation, our free ABC Playbook on the main website will help you get there. Come back when you are running ads regularly — we will be here.
       </div>
       <a href="https://tubalcainmy.github.io/tubalcain-advertising/" class="qresult-btn primary" target="_blank" rel="noopener">
         Visit Our Main Website →
@@ -2640,13 +3150,14 @@ async function submitQualifier() {
     trial:    'I want to start the Proof of Concept package',
     pipeline: 'I want the Pipeline Protocol monthly package',
     elite:    'I want to discuss the Elite Multi-City Programme',
+    nurture:  'I want to add the 90-Day Lead Nurture System to my package',
     hero:     'I want to check if my city is still open',
     nav:      'I want to check if my city is still open',
     close:    'I want to check if my city is still open for the Pipeline Protocol',
   };
   const msgBase = packageMap[qSource] || 'I want to check if my city is still open';
   const waMsg = encodeURIComponent(
-    'Hi Tubalcain Agency, ' + msgBase + '. My name is ' + first + ' ' + last +
+    'Hi Mystery, ' + msgBase + '. My name is ' + first + ' ' + last +
     ', based in ' + city + '. My WhatsApp is ' + phone + '.'
   );
 
